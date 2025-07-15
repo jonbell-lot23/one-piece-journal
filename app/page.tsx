@@ -1,113 +1,203 @@
-import Image from 'next/image'
+'use client'
+
+import { Anchor, Calendar, ArrowUp, ArrowDown } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import Masonry from '@/components/masonry'
+
+interface JourneyEntry {
+  type: 'Episode' | 'Summary' | 'Manga' | 'Game' | 'Note'
+  title: string
+  description: string
+  date: string
+}
+
+interface GapEntry {
+  type: 'Gap'
+  description: string
+  fromDate: string
+  toDate: string
+}
+
+const palette = {
+  Episode: '#0EA5E9',
+  Summary: '#FACC15',
+  Manga: '#F472B6',
+  Game: '#34D399',
+  Note: '#A78BFA'
+}
+
+function JourneyCard({ entry, index }: { entry: JourneyEntry; index: number }) {
+  return (
+    <article 
+      className="rounded-xl shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md bg-white ring-1 ring-neutral-200"
+      style={{
+        opacity: 0,
+        transform: 'translateY(8px)',
+        animation: `fadeInUp 0.5s ease-out ${index * 70}ms forwards`
+      }}
+    >
+      <div className="p-6 flex flex-col gap-4">
+        <span 
+          className="text-sm font-medium px-3 py-1 rounded-full text-white w-fit"
+          style={{ backgroundColor: palette[entry.type] ?? '#6b7280' }}
+        >
+          {entry.type}
+        </span>
+        
+        <h2 className="text-lg sm:text-xl font-semibold tracking-tight">
+          {entry.title}
+        </h2>
+        
+        {entry.description && (
+          <p className="text-sm sm:text-base leading-relaxed whitespace-pre-wrap">
+            {entry.description}
+          </p>
+        )}
+        
+        {entry.date && (
+          <div className="mt-2 flex items-center gap-2 text-sm text-neutral-500">
+            <Calendar className="w-4 h-4" />
+            <time dateTime={entry.date}>
+              {new Date(entry.date).toLocaleDateString(undefined, {
+                year: 'numeric',
+                month: 'short', 
+                day: 'numeric'
+              })}
+            </time>
+          </div>
+        )}
+      </div>
+    </article>
+  )
+}
+
+function GapCard({ gap, index }: { gap: GapEntry; index: number }) {
+  const fromDate = new Date(gap.fromDate)
+  const toDate = new Date(gap.toDate)
+  const daysDiff = Math.ceil((toDate.getTime() - fromDate.getTime()) / (1000 * 60 * 60 * 24))
+  
+  return (
+    <div 
+      className="rounded-lg bg-neutral-100 border border-neutral-200 p-6 text-center flex flex-col justify-center min-h-[120px]"
+      style={{
+        opacity: 0,
+        transform: 'translateY(8px)',
+        animation: `fadeInUp 0.5s ease-out ${index * 70}ms forwards`
+      }}
+    >
+      <div className="text-xs text-neutral-500 mb-2">
+        {daysDiff} days later
+      </div>
+      <div className="text-sm text-neutral-600 italic">
+        {gap.description}
+      </div>
+    </div>
+  )
+}
 
 export default function Home() {
+  const [entries, setEntries] = useState<(JourneyEntry | GapEntry)[]>([])
+  const [columns, setColumns] = useState(3)
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
+
+  useEffect(() => {
+    fetch('/api/journey')
+      .then(res => res.json())
+      .then(data => {
+        const sorted = data.sort((a: JourneyEntry, b: JourneyEntry) => 
+          sortDirection === 'asc' 
+            ? new Date(a.date).getTime() - new Date(b.date).getTime()
+            : new Date(b.date).getTime() - new Date(a.date).getTime()
+        )
+        
+        // Insert gap cards between entries
+        const withGaps: (JourneyEntry | GapEntry)[] = []
+        for (let i = 0; i < sorted.length; i++) {
+          withGaps.push(sorted[i])
+          
+          if (i < sorted.length - 1) {
+            const currentDate = new Date(sorted[i].date)
+            const nextDate = new Date(sorted[i + 1].date)
+            const daysDiff = Math.ceil((nextDate.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24))
+            
+            if (daysDiff > 30) { // Only show gaps longer than 30 days
+              let gapDescription = ''
+              if (daysDiff > 365) {
+                gapDescription = `${Math.floor(daysDiff / 365)} year${Math.floor(daysDiff / 365) > 1 ? 's' : ''} of no One Piece activity`
+              } else if (daysDiff > 30) {
+                gapDescription = `${Math.floor(daysDiff / 30)} month${Math.floor(daysDiff / 30) > 1 ? 's' : ''} of no One Piece activity`
+              }
+              
+              withGaps.push({
+                type: 'Gap',
+                description: gapDescription,
+                fromDate: sorted[i].date,
+                toDate: sorted[i + 1].date
+              })
+            }
+          }
+        }
+        
+        setEntries(withGaps)
+      })
+  }, [sortDirection])
+
+  useEffect(() => {
+    const updateColumns = () => {
+      if (window.innerWidth < 640) setColumns(1)
+      else if (window.innerWidth < 1024) setColumns(2)
+      else setColumns(3)
+    }
+
+    updateColumns()
+    window.addEventListener('resize', updateColumns)
+    return () => window.removeEventListener('resize', updateColumns)
+  }, [])
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="min-h-screen bg-neutral-50 text-neutral-900 flex flex-col font-['Inter','Helvetica_Neue',sans-serif]">
+      <header className="sticky top-0 z-30 bg-neutral-50/90 backdrop-blur-sm shadow-sm">
+        <div className="mx-auto max-w-7xl px-6 py-4 flex items-center justify-between">
+          <h1 className="text-xl sm:text-2xl font-semibold tracking-tight flex items-center gap-2">
+            <Anchor className="w-5 h-5" />
+            One Piece Journey
+          </h1>
+          <button
+            onClick={() => setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')}
+            className="flex items-center gap-1 px-3 py-1.5 text-sm rounded-md hover:bg-neutral-100 transition-colors"
           >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+            {sortDirection === 'asc' ? (
+              <ArrowUp className="w-4 h-4" />
+            ) : (
+              <ArrowDown className="w-4 h-4" />
+            )}
+            {sortDirection === 'asc' ? 'Oldest first' : 'Newest first'}
+          </button>
         </div>
-      </div>
+      </header>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      <main className="mx-auto max-w-7xl w-full p-4">
+        <div className="flex flex-col gap-4">
+          {entries.map((entry, index) => (
+            entry.type === 'Gap' ? (
+              <GapCard key={index} gap={entry} index={index} />
+            ) : (
+              <div key={index} className="w-full">
+                <JourneyCard entry={entry} index={index} />
+              </div>
+            )
+          ))}
+        </div>
+      </main>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      <style jsx>{`
+        @keyframes fadeInUp {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
+    </div>
   )
 }

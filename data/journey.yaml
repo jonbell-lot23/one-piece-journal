@@ -1,0 +1,29 @@
+- type: Note
+  title: "My Barber Loves One Piece"
+  description: "Barber recommended One Piece during haircut. Started reading, made progress, then gave up after a few weeks."
+  date: "2022-03-01"
+
+- type: Episode
+  title: "Netflix Live Action"
+  description: "Watched the Netflix show. Actually pretty good!"
+  date: "2023-09-05"
+
+- type: Note
+  title: "My Friend Loves One Piece"
+  description: "Restarted the project - now called 'My Friend Loves One Piece' and made it to chapter 105."
+  date: "2024-05-12"
+
+- type: Manga
+  title: "Speed Reading Sprint"
+  description: "Six weeks of speed running through the manga with AI assistance and progress tracking."
+  date: "2024-05-26"
+
+- type: Summary
+  title: "YouTube Summary Phase"
+  description: "Gave up on reading, relied on YouTube summaries instead for catch-up."
+  date: "2024-06-01"
+
+- type: Episode
+  title: "Robin Arc Beginning"
+  description: "Starting fresh with the Robin arc, episode 67. New approach to the journey."
+  date: "2025-07-01"
