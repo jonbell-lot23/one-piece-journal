@@ -3,6 +3,7 @@
 import { Anchor, Calendar, ArrowUp, ArrowDown } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import Masonry from '@/components/masonry'
+import EpisodeGrid from '@/components/episode-grid'
 
 interface JourneyEntry {
   type: 'Episode' | 'Summary' | 'Manga' | 'Game' | 'Note'
@@ -176,7 +177,9 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-7xl w-full p-4">
+      <main className="mx-auto max-w-7xl w-full p-4 space-y-8">
+        <EpisodeGrid />
+        
         <div className="flex flex-col gap-4">
           {entries.map((entry, index) => (
             entry.type === 'Gap' ? (
