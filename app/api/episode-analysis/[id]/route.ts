@@ -13,7 +13,7 @@ export async function GET(
       process.cwd(),
       "public",
       "episode",
-      `${episodeId}-analysis.yaml`
+      `${episodeId}.yaml`
     );
 
     if (!fs.existsSync(analysisFile)) {

@@ -2,17 +2,9 @@
 
 import { useState, useEffect } from "react";
 
-interface Episode {
-  id: number;
-  title: string;
-  description: string;
-  content: string;
-}
-
 interface EpisodeAnalysis {
   episode: number;
   title: string;
-  air_date: string;
   synopsis: string[];
   focal_points: string;
   pivotal_beats: {
@@ -24,11 +16,19 @@ interface EpisodeAnalysis {
 }
 
 export default function ReadPage() {
-  const [episodes, setEpisodes] = useState<Episode[]>([]);
-  const [selectedEpisode, setSelectedEpisode] = useState<Episode | null>(null);
-  const [episodeAnalysis, setEpisodeAnalysis] =
+  const [episodes, setEpisodes] = useState<EpisodeAnalysis[]>([]);
+  const [selectedEpisode, setSelectedEpisode] =
     useState<EpisodeAnalysis | null>(null);
+  const [viewedEpisodes, setViewedEpisodes] = useState<Set<number>>(new Set());
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Load viewed episodes from localStorage
+    const savedViewed = localStorage.getItem("viewedEpisodes");
+    if (savedViewed) {
+      setViewedEpisodes(new Set(JSON.parse(savedViewed)));
+    }
+  }, []);
 
   useEffect(() => {
     const fetchEpisodes = async () => {
@@ -39,12 +39,6 @@ export default function ReadPage() {
           setEpisodes(data);
           if (data.length > 0) {
             setSelectedEpisode(data[0]);
-            // Load analysis for episode 1
-            const analysisResponse = await fetch("/api/episode-analysis/1");
-            if (analysisResponse.ok) {
-              const analysisData = await analysisResponse.json();
-              setEpisodeAnalysis(analysisData);
-            }
           }
         } else {
           console.error("Failed to fetch episodes");
@@ -59,22 +53,19 @@ export default function ReadPage() {
     fetchEpisodes();
   }, []);
 
-  const handleEpisodeSelect = async (episode: Episode) => {
+  const handleEpisodeSelect = (episode: EpisodeAnalysis) => {
     setSelectedEpisode(episode);
-    try {
-      const analysisResponse = await fetch(
-        `/api/episode-analysis/${episode.id}`
-      );
-      if (analysisResponse.ok) {
-        const analysisData = await analysisResponse.json();
-        setEpisodeAnalysis(analysisData);
-      } else {
-        setEpisodeAnalysis(null);
-      }
-    } catch (error) {
-      console.error("Error fetching analysis:", error);
-      setEpisodeAnalysis(null);
-    }
+
+    // Mark episode as viewed
+    const newViewed = new Set(viewedEpisodes);
+    newViewed.add(episode.episode);
+    setViewedEpisodes(newViewed);
+
+    // Save to localStorage
+    localStorage.setItem(
+      "viewedEpisodes",
+      JSON.stringify(Array.from(newViewed))
+    );
   };
 
   if (loading) {
@@ -94,144 +85,111 @@ export default function ReadPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">
-          One Piece Episodes
-        </h1>
+    <div className="min-h-screen bg-white">
+      <div className="grid grid-cols-1 lg:grid-cols-3">
+        {/* Episode Grid - Left Side */}
+        <div className="lg:col-span-1 bg-gray-100 p-6">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">
+            One Piece Episodes
+          </h2>
+          <div className="grid grid-cols-6 gap-1">
+            {episodes.map((episode) => {
+              const isViewed = viewedEpisodes.has(episode.episode);
+              const isSelected = selectedEpisode?.episode === episode.episode;
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Episode Grid - Left Side */}
-          <div className="lg:col-span-1">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
-              Episodes
-            </h2>
-            <div className="space-y-3 max-h-[600px] overflow-y-auto">
-              {episodes.map((episode) => (
+              return (
                 <div
-                  key={episode.id}
+                  key={episode.episode}
                   onClick={() => handleEpisodeSelect(episode)}
-                  className={`p-4 rounded-lg cursor-pointer transition-colors ${
-                    selectedEpisode?.id === episode.id
-                      ? "bg-blue-100 border-2 border-blue-300"
-                      : "bg-white border border-gray-200 hover:bg-gray-50"
-                  }`}
+                  className={`
+                    w-10 h-10 rounded cursor-pointer transition-all duration-150 flex items-center justify-center text-xs font-medium
+                    ${
+                      isSelected
+                        ? "bg-blue-500 text-white"
+                        : isViewed
+                          ? "bg-black text-white hover:bg-gray-800"
+                          : "bg-white text-black border border-gray-300 hover:bg-gray-50"
+                    }
+                  `}
+                  title={`Episode ${episode.episode}: ${episode.title}`}
                 >
-                  <h3 className="font-semibold text-gray-900 text-sm">
-                    Episode {episode.id}
-                  </h3>
-                  <p className="text-gray-700 text-xs mt-1 line-clamp-2">
-                    {episode.title}
-                  </p>
-                  <p className="text-gray-500 text-xs mt-2 line-clamp-3">
-                    {episode.description}
-                  </p>
+                  {episode.episode}
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
+        </div>
 
-          {/* Episode Content - Right Side */}
-          <div className="lg:col-span-2">
-            {selectedEpisode && (
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <div className="mb-6">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                    Episode {selectedEpisode.id}
-                  </h2>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">
-                    {selectedEpisode.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    {selectedEpisode.description}
-                  </p>
-                </div>
+        {/* Episode Content - Right Side */}
+        <div className="lg:col-span-2 p-8">
+          {selectedEpisode && (
+            <div>
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                  Episode {selectedEpisode.episode}
+                </h2>
+                <h3 className="text-lg font-semibold text-gray-800 mb-3">
+                  {selectedEpisode.title}
+                </h3>
+              </div>
 
-                {episodeAnalysis ? (
-                  <div className="prose prose-gray max-w-none">
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <h4 className="text-lg font-semibold text-gray-800 mb-3">
-                        Deep Analysis:
-                      </h4>
+              <div className="mb-4">
+                <h5 className="font-semibold text-gray-800 mb-2">Synopsis:</h5>
+                <ul className="list-disc list-inside text-gray-700">
+                  {selectedEpisode.synopsis.map((point, index) => (
+                    <li key={index}>{point}</li>
+                  ))}
+                </ul>
+              </div>
 
-                      <div className="mb-4">
-                        <h5 className="font-semibold text-gray-800 mb-2">
-                          Synopsis:
-                        </h5>
-                        <ul className="list-disc list-inside text-gray-700">
-                          {episodeAnalysis.synopsis.map((point, index) => (
-                            <li key={index}>{point}</li>
-                          ))}
-                        </ul>
-                      </div>
+              <div className="mb-4">
+                <h5 className="font-semibold text-gray-800 mb-2">
+                  Focal Points:
+                </h5>
+                <p className="text-gray-700">{selectedEpisode.focal_points}</p>
+              </div>
 
-                      <div className="mb-4">
-                        <h5 className="font-semibold text-gray-800 mb-2">
-                          Focal Points:
-                        </h5>
-                        <p className="text-gray-700">
-                          {episodeAnalysis.focal_points}
+              <div>
+                <h5 className="font-semibold text-gray-800 mb-3">
+                  Pivotal Beats:
+                </h5>
+                {selectedEpisode.pivotal_beats.map((beat, index) => (
+                  <div
+                    key={index}
+                    className="mb-6 p-3 bg-gray-50 rounded border"
+                  >
+                    <h6 className="font-semibold text-gray-800 mb-2">
+                      {index + 1}. {beat.title}
+                    </h6>
+                    <div className="space-y-2 text-sm">
+                      <div>
+                        <span className="font-semibold text-gray-700">
+                          WHAT WAS SAID:
+                        </span>
+                        <p className="text-gray-600 mt-1">
+                          {beat.what_was_said}
                         </p>
                       </div>
-
                       <div>
-                        <h5 className="font-semibold text-gray-800 mb-3">
-                          Pivotal Beats:
-                        </h5>
-                        {episodeAnalysis.pivotal_beats.map((beat, index) => (
-                          <div
-                            key={index}
-                            className="mb-6 p-3 bg-white rounded border"
-                          >
-                            <h6 className="font-semibold text-gray-800 mb-2">
-                              {index + 1}. {beat.title}
-                            </h6>
-                            <div className="space-y-2 text-sm">
-                              <div>
-                                <span className="font-semibold text-gray-700">
-                                  WHAT WAS SAID:
-                                </span>
-                                <p className="text-gray-600 mt-1">
-                                  {beat.what_was_said}
-                                </p>
-                              </div>
-                              <div>
-                                <span className="font-semibold text-gray-700">
-                                  WHY THIS MATTERS:
-                                </span>
-                                <p className="text-gray-600 mt-1">
-                                  {beat.why_this_matters}
-                                </p>
-                              </div>
-                              <div>
-                                <span className="font-semibold text-gray-700">
-                                  THE SUBTEXT:
-                                </span>
-                                <p className="text-gray-600 mt-1">
-                                  {beat.subtext}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
+                        <span className="font-semibold text-gray-700">
+                          WHY THIS MATTERS:
+                        </span>
+                        <p className="text-gray-600 mt-1">
+                          {beat.why_this_matters}
+                        </p>
+                      </div>
+                      <div>
+                        <span className="font-semibold text-gray-700">
+                          THE SUBTEXT:
+                        </span>
+                        <p className="text-gray-600 mt-1">{beat.subtext}</p>
                       </div>
                     </div>
                   </div>
-                ) : (
-                  <div className="prose prose-gray max-w-none">
-                    <div className="bg-gray-50 p-4 rounded-lg">
-                      <h4 className="text-lg font-semibold text-gray-800 mb-3">
-                        Episode Content:
-                      </h4>
-                      <div className="text-gray-700 leading-relaxed whitespace-pre-line">
-                        {selectedEpisode.content}
-                      </div>
-                    </div>
-                  </div>
-                )}
+                ))}
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

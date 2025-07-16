@@ -21,7 +21,7 @@ export async function GET() {
     }
 
     // Sort episodes by ID
-    episodes.sort((a, b) => a.id - b.id);
+    episodes.sort((a, b) => a.episode - b.episode);
 
     return NextResponse.json(episodes);
   } catch (error) {
