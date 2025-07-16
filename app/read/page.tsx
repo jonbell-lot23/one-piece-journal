@@ -21,6 +21,8 @@ export default function ReadPage() {
     useState<EpisodeAnalysis | null>(null);
   const [viewedEpisodes, setViewedEpisodes] = useState<Set<number>>(new Set());
   const [loading, setLoading] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
+  const [showAllEpisodes, setShowAllEpisodes] = useState(false);
 
   useEffect(() => {
     // Load viewed episodes from localStorage
@@ -68,6 +70,26 @@ export default function ReadPage() {
     );
   };
 
+  const clearViewedEpisodes = () => {
+    setViewedEpisodes(new Set());
+    localStorage.removeItem("viewedEpisodes");
+    setShowMenu(false);
+  };
+
+  const getCurrentEpisodeIndex = () => {
+    return episodes.findIndex((ep) => ep.episode === selectedEpisode?.episode);
+  };
+
+  const getMobileEpisodes = () => {
+    if (!selectedEpisode) return [];
+
+    const currentIndex = getCurrentEpisodeIndex();
+    const start = Math.max(0, currentIndex - 3);
+    const end = Math.min(episodes.length, currentIndex + 4);
+
+    return episodes.slice(start, end);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -86,12 +108,127 @@ export default function ReadPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="grid grid-cols-1 lg:grid-cols-3">
-        {/* Episode Grid - Left Side */}
-        <div className="lg:col-span-1 bg-gray-100 p-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-4">
-            One Piece Episodes
+      {/* Mobile Navigation Strip */}
+      <div className="lg:hidden bg-gray-100 p-4 border-b">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-lg font-semibold text-gray-800">
+            Episode {selectedEpisode?.episode || "Loading..."}
           </h2>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setShowAllEpisodes(!showAllEpisodes)}
+              className="px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
+            >
+              {showAllEpisodes ? "Hide All" : "Show All"}
+            </button>
+            <button
+              onClick={() => setShowMenu(!showMenu)}
+              className="px-3 py-1 text-sm bg-gray-500 text-white rounded hover:bg-gray-600"
+            >
+              Menu
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Episode Strip */}
+        {!showAllEpisodes && (
+          <div className="flex gap-1 overflow-x-auto pb-2">
+            {getMobileEpisodes().map((episode) => {
+              const isViewed = viewedEpisodes.has(episode.episode);
+              const isSelected = selectedEpisode?.episode === episode.episode;
+
+              return (
+                <div
+                  key={episode.episode}
+                  onClick={() => handleEpisodeSelect(episode)}
+                  className={`
+                    flex-shrink-0 w-10 h-10 rounded cursor-pointer transition-all duration-150 flex items-center justify-center text-xs font-medium
+                    ${
+                      isSelected
+                        ? "bg-blue-500 text-white"
+                        : isViewed
+                          ? "bg-black text-white hover:bg-gray-800"
+                          : "bg-white text-black border border-gray-300 hover:bg-gray-50"
+                    }
+                  `}
+                  title={`Episode ${episode.episode}: ${episode.title}`}
+                >
+                  {episode.episode}
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Mobile Menu */}
+        {showMenu && (
+          <div className="absolute top-16 right-4 bg-white border rounded-lg shadow-lg p-3 z-10">
+            <button
+              onClick={clearViewedEpisodes}
+              className="block w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded"
+            >
+              Clear Viewed Episodes
+            </button>
+          </div>
+        )}
+
+        {/* Mobile Full Episode Grid */}
+        {showAllEpisodes && (
+          <div className="flex flex-wrap gap-0.5">
+            {episodes.map((episode) => {
+              const isViewed = viewedEpisodes.has(episode.episode);
+              const isSelected = selectedEpisode?.episode === episode.episode;
+
+              return (
+                <div
+                  key={episode.episode}
+                  onClick={() => handleEpisodeSelect(episode)}
+                  className={`
+                    w-10 h-10 rounded cursor-pointer transition-all duration-150 flex items-center justify-center text-xs font-medium
+                    ${
+                      isSelected
+                        ? "bg-blue-500 text-white"
+                        : isViewed
+                          ? "bg-black text-white hover:bg-gray-800"
+                          : "bg-white text-black border border-gray-300 hover:bg-gray-50"
+                    }
+                  `}
+                  title={`Episode ${episode.episode}: ${episode.title}`}
+                >
+                  {episode.episode}
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3">
+        {/* Episode Grid - Left Side (Desktop) */}
+        <div className="hidden lg:block lg:col-span-1 bg-gray-100 p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-semibold text-gray-800">
+              One Piece Episodes
+            </h2>
+            <div className="relative">
+              <button
+                onClick={() => setShowMenu(!showMenu)}
+                className="px-3 py-1 text-sm bg-gray-500 text-white rounded hover:bg-gray-600"
+              >
+                Menu
+              </button>
+              {showMenu && (
+                <div className="absolute top-full right-0 mt-1 bg-white border rounded-lg shadow-lg p-2 z-10">
+                  <button
+                    onClick={clearViewedEpisodes}
+                    className="block w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded"
+                  >
+                    Clear Viewed Episodes
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
           <div className="flex flex-wrap gap-0.5">
             {episodes.map((episode) => {
               const isViewed = viewedEpisodes.has(episode.episode);
@@ -121,7 +258,7 @@ export default function ReadPage() {
         </div>
 
         {/* Episode Content - Right Side */}
-        <div className="lg:col-span-2 p-8">
+        <div className="lg:col-span-2 p-4 lg:p-8">
           {selectedEpisode && (
             <div>
               <div className="mb-6">
