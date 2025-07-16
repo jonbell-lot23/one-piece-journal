@@ -1,1 +1,1 @@
-Analysis complete for episodes 22-26 with YAML format provided for each episode.
+Analysis complete for episodes 22-26 with both narrative analysis and YAML format provided.
