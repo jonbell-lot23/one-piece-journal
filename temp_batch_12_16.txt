@@ -1,1 +1,1 @@
-Analysis complete! I've provided detailed analysis for One Piece episodes 12-16 following your exact format, plus the YAML files ready to be saved as 12.yaml, 13.yaml, 14.yaml, 15.yaml, and 16.yaml in the public/episode directory.
+Episode analysis complete for episodes 12-16
