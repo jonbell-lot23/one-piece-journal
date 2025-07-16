@@ -1,1 +1,2 @@
-Analysis complete for episodes 27-31. Each episode analyzed with synopsis, focal points, and 5-7 pivotal beats containing dialogue, narrative significance, and subtext. YAML format provided for saving as individual episode files.
+Analysis complete for episodes 27-31. Each episode has been analyzed with the specified format, and the corresponding YAML files have been generated for easy storage and reference.
+provided for saving as individual episode files.
