@@ -1,40 +1,70 @@
-'use client'
+"use client";
 
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useEffect, useState, useRef } from "react";
 
 interface MasonryProps {
-  columns?: number
-  gap?: number
-  children: ReactNode[]
+  columns?: number;
+  gap?: number;
+  children: ReactNode[];
+  className?: string;
 }
 
-export default function Masonry({ columns = 3, gap = 16, children }: MasonryProps) {
-  const [columnHeights, setColumnHeights] = useState<number[]>([])
+export default function Masonry({
+  columns = 3,
+  gap = 16,
+  children,
+  className = "",
+}: MasonryProps) {
+  const [columnHeights, setColumnHeights] = useState<number[]>([]);
+  const [responsiveColumns, setResponsiveColumns] = useState(columns);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setColumnHeights(new Array(columns).fill(0))
-  }, [columns])
+    const updateColumns = () => {
+      if (!containerRef.current) return;
+
+      const width = containerRef.current.offsetWidth;
+      let cols = columns;
+
+      if (width < 640) cols = 1;
+      else if (width < 1024) cols = Math.min(2, columns);
+      else cols = columns;
+
+      setResponsiveColumns(cols);
+      setColumnHeights(new Array(cols).fill(0));
+    };
+
+    updateColumns();
+    window.addEventListener("resize", updateColumns);
+    return () => window.removeEventListener("resize", updateColumns);
+  }, [columns]);
 
   const getColumns = () => {
-    const cols: ReactNode[][] = Array.from({ length: columns }, () => [])
-    
+    const cols: ReactNode[][] = Array.from(
+      { length: responsiveColumns },
+      () => []
+    );
+
     children.forEach((child, index) => {
-      const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights))
-      cols[shortestColumnIndex].push(child)
-      
+      const shortestColumnIndex = columnHeights.indexOf(
+        Math.min(...columnHeights)
+      );
+      cols[shortestColumnIndex].push(child);
+
       // Estimate height for balancing (rough approximation)
-      const estimatedHeight = 200 + Math.random() * 100
-      columnHeights[shortestColumnIndex] += estimatedHeight
-    })
+      const estimatedHeight = 200 + Math.random() * 100;
+      columnHeights[shortestColumnIndex] += estimatedHeight;
+    });
 
-    return cols
-  }
+    return cols;
+  };
 
-  if (columnHeights.length === 0) return null
+  if (columnHeights.length === 0) return null;
 
   return (
-    <div 
-      className="flex"
+    <div
+      ref={containerRef}
+      className={`flex ${className}`}
       style={{ gap: `${gap}px` }}
     >
       {getColumns().map((column, columnIndex) => (
@@ -47,5 +77,5 @@ export default function Masonry({ columns = 3, gap = 16, children }: MasonryProp
         </div>
       ))}
     </div>
-  )
+  );
 }

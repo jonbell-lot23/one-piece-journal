@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Masonry from "@/components/masonry";
 
 interface EpisodeAnalysis {
   episode: number;
@@ -13,6 +14,9 @@ interface EpisodeAnalysis {
     why_this_matters: string;
     subtext: string;
   }[];
+  themes?: string[];
+  character_development?: string[];
+  world_building?: string[];
 }
 
 export default function ReadPage() {
@@ -111,7 +115,7 @@ export default function ReadPage() {
       {/* Mobile Navigation Strip */}
       <div className="lg:hidden bg-gray-100 p-4 border-b">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-semibold text-gray-800">
+          <h2 className="text-lg font-semibold text-gray-800 font-['Cochin','Georgia',serif]">
             Episode {selectedEpisode?.episode || "Loading..."}
           </h2>
           <div className="flex gap-2">
@@ -123,9 +127,13 @@ export default function ReadPage() {
             </button>
             <button
               onClick={() => setShowMenu(!showMenu)}
-              className="px-3 py-1 text-sm bg-gray-500 text-white rounded hover:bg-gray-600"
+              className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center"
             >
-              Menu
+              <div className="flex flex-col gap-0.5">
+                <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
+                <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
+                <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
+              </div>
             </button>
           </div>
         </div>
@@ -203,19 +211,23 @@ export default function ReadPage() {
         )}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3">
-        {/* Episode Grid - Left Side (Desktop) */}
+      <div className="grid grid-cols-1 lg:grid-cols-4">
+        {/* Episode Grid - Left Side (Desktop) - Made narrower */}
         <div className="hidden lg:block lg:col-span-1 bg-gray-100 p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-gray-800">
+            <h2 className="text-xl font-semibold text-gray-800 font-['Cochin','Georgia',serif]">
               One Piece Episodes
             </h2>
             <div className="relative">
               <button
                 onClick={() => setShowMenu(!showMenu)}
-                className="px-3 py-1 text-sm bg-gray-500 text-white rounded hover:bg-gray-600"
+                className="w-8 h-8 rounded-full hover:bg-gray-200 flex items-center justify-center"
               >
-                Menu
+                <div className="flex flex-col gap-0.5">
+                  <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
+                  <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
+                  <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
+                </div>
               </button>
               {showMenu && (
                 <div className="absolute top-full right-0 mt-1 bg-white border rounded-lg shadow-lg p-2 z-10">
@@ -257,73 +269,99 @@ export default function ReadPage() {
           </div>
         </div>
 
-        {/* Episode Content - Right Side */}
-        <div className="lg:col-span-2 p-4 lg:p-8">
+        {/* Episode Content - Right Side - Made wider and added prose styling */}
+        <div className="lg:col-span-3 p-4 lg:p-8 font-['Cochin','Georgia',serif]">
           {selectedEpisode && (
-            <div>
+            <div className="prose prose-lg max-w-none">
               <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                  Episode {selectedEpisode.episode}
-                </h2>
-                <h3 className="text-lg font-semibold text-gray-800 mb-3">
-                  {selectedEpisode.title}
-                </h3>
+                <h1 className="text-4xl font-bold text-gray-900 mb-0">
+                  {selectedEpisode.episode}: {selectedEpisode.title}
+                </h1>
               </div>
 
-              <div className="mb-4">
-                <h5 className="font-semibold text-gray-800 mb-2">Synopsis:</h5>
-                <ul className="list-disc list-inside text-gray-700">
+              <div className="mb-6">
+                <ul
+                  className="list-disc list-inside text-gray-700 text-lg leading-relaxed space-y-0.5 mt-0 pt-0 custom-synopsis-list"
+                  style={{ marginTop: "0", paddingTop: "0" }}
+                >
                   {selectedEpisode.synopsis.map((point, index) => (
-                    <li key={index}>{point}</li>
+                    <li
+                      key={index}
+                      className={index === 0 ? "mt-0 pt-0" : ""}
+                      style={
+                        index === 0 ? { marginTop: "0", paddingTop: "0" } : {}
+                      }
+                    >
+                      {point}
+                    </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="mb-4">
-                <h5 className="font-semibold text-gray-800 mb-2">
-                  Focal Points:
-                </h5>
-                <p className="text-gray-700">{selectedEpisode.focal_points}</p>
+              <div className="mb-6">
+                <div className="flex flex-wrap gap-2">
+                  {selectedEpisode.focal_points
+                    .split(", ")
+                    .map((character, index) => (
+                      <span
+                        key={index}
+                        className="bg-black text-white px-3 py-1 rounded-full text-sm font-['Inter',sans-serif]"
+                      >
+                        {character}
+                      </span>
+                    ))}
+                </div>
               </div>
 
               <div>
-                <h5 className="font-semibold text-gray-800 mb-3">
-                  Pivotal Beats:
-                </h5>
-                {selectedEpisode.pivotal_beats.map((beat, index) => (
-                  <div
-                    key={index}
-                    className="mb-6 p-3 bg-gray-50 rounded border"
-                  >
-                    <h6 className="font-semibold text-gray-800 mb-2">
-                      {index + 1}. {beat.title}
-                    </h6>
-                    <div className="space-y-2 text-sm">
-                      <div>
-                        <span className="font-semibold text-gray-700">
-                          WHAT WAS SAID:
-                        </span>
-                        <p className="text-gray-600 mt-1">
-                          {beat.what_was_said}
-                        </p>
+                {selectedEpisode.pivotal_beats &&
+                selectedEpisode.pivotal_beats.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {selectedEpisode.pivotal_beats.map((beat, index) => (
+                      <div
+                        key={index}
+                        className="bg-gray-50 rounded-lg border p-4 hover:shadow-md transition-shadow"
+                      >
+                        <h6 className="font-semibold text-gray-800 mb-4 text-xl">
+                          {index + 1}. {beat.title}
+                        </h6>
+                        <div className="space-y-4">
+                          <div>
+                            <span className="font-semibold text-gray-700 text-base">
+                              WHAT WAS SAID:
+                            </span>
+                            <br />
+                            <span className="text-gray-600 text-base">
+                              {beat.what_was_said}
+                            </span>
+                          </div>
+                          <div>
+                            <span className="font-semibold text-gray-700 text-base">
+                              WHY THIS MATTERS:
+                            </span>
+                            <br />
+                            <span className="text-gray-600 text-base">
+                              {beat.why_this_matters}
+                            </span>
+                          </div>
+                          <div>
+                            <span className="font-semibold text-gray-700 text-base">
+                              THE SUBTEXT:
+                            </span>
+                            <br />
+                            <span className="text-gray-600 text-base">
+                              {beat.subtext}
+                            </span>
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <span className="font-semibold text-gray-700">
-                          WHY THIS MATTERS:
-                        </span>
-                        <p className="text-gray-600 mt-1">
-                          {beat.why_this_matters}
-                        </p>
-                      </div>
-                      <div>
-                        <span className="font-semibold text-gray-700">
-                          THE SUBTEXT:
-                        </span>
-                        <p className="text-gray-600 mt-1">{beat.subtext}</p>
-                      </div>
-                    </div>
+                    ))}
                   </div>
-                ))}
+                ) : (
+                  <div className="text-gray-500 italic text-base">
+                    No pivotal beats data available for this episode.
+                  </div>
+                )}
               </div>
             </div>
           )}

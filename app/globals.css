@@ -25,3 +25,25 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+/* Aggressively remove all top spacing from the synopsis list */
+.prose .custom-synopsis-list {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.prose .custom-synopsis-list li:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Also target the prose container itself for the first ul */
+.prose > ul:first-of-type {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.prose > ul:first-of-type > li:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
