@@ -270,16 +270,19 @@ export default function ReadPage() {
         </div>
 
         {/* Episode Content - Right Side - Made wider and added prose styling */}
-        <div className="lg:col-span-3 p-4 lg:p-8 font-['Cochin','Georgia',serif]">
+        <div className="lg:col-span-3 pt-16 pl-16 pr-4 pb-4 lg:pr-8 lg:pb-8 font-['Cochin','Georgia',serif]">
           {selectedEpisode && (
-            <div className="prose prose-lg max-w-none">
-              <div className="mb-6">
-                <h1 className="text-4xl font-bold text-gray-900 mb-0">
+            <div className="max-w-none">
+              <div className="mb-0">
+                <h1
+                  className="text-4xl font-bold text-gray-900 mb-0"
+                  style={{ marginBottom: "0", paddingBottom: "0" }}
+                >
                   {selectedEpisode.episode}: {selectedEpisode.title}
                 </h1>
               </div>
 
-              <div className="mb-6">
+              <div className="mb-6 mt-8 ml-8">
                 <ul
                   className="list-disc list-inside text-gray-700 text-lg leading-relaxed space-y-0.5 mt-0 pt-0 custom-synopsis-list"
                   style={{ marginTop: "0", paddingTop: "0" }}
