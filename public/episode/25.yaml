@@ -1,0 +1,54 @@
+I need permission to create the file. Let me generate the YAML content for Episode 25:
+
+```yaml
+episode: 25
+title: "The Emergence of the Superb Kicking Skill: Sanji vs. the Iron Wall Pearl"
+air_date: "May 17, 2000"
+synopsis:
+  - "Restaurant under siege as pirates launch assault"
+  - "Chef confronts armored opponent in defense of home"
+  - "Battle platforms deployed to protect establishment"
+  - "Leader reveals strategic ambitions for conquest"
+  - "Mentor taken hostage in tactical maneuver"
+focal_points: "Chef (Sanji), Iron Wall Pearl, Don Krieg"
+pivotal_beats:
+  - title: "Pearl's Shield Introduction"
+    what_was_said: "I am Iron Wall Pearl! No one has ever laid a scratch on me! My body is my pride!"
+    why_this_matters: "Establishes Pearl's defensive fighting style and obsessive vanity, setting up his psychological weakness."
+    subtext: "Pearl's armor represents both physical protection and emotional fragility—his identity depends entirely on remaining unmarked."
+  - title: "Sanji's Combat Philosophy"
+    what_was_said: "A chef's hands are his life. I won't risk them in a pointless brawl. But legs... legs are a different story."
+    why_this_matters: "Reveals Sanji's unique fighting style born from his dedication to cooking, establishing his character's core values."
+    subtext: "The separation of cooking and combat tools reflects Sanji's dual nature—artist and warrior compartmentalized to preserve what matters most."
+  - title: "Krieg's Grand Line Ambition"
+    what_was_said: "This restaurant is perfect—no one would suspect a floating restaurant of being a pirate ship. And that old man's logbook... it contains the secrets of Paradise!"
+    why_this_matters: "Exposes Krieg's strategic thinking and introduces the concept of the Grand Line's dangers requiring special knowledge."
+    subtext: "Krieg's plan to disguise strength as weakness mirrors the deceptive nature of power in the Grand Line itself."
+  - title: "Battle Platform Deployment"
+    what_was_said: "Raise the fins! We're not letting them destroy our restaurant! If they want a fight, they'll get it outside!"
+    why_this_matters: "Shows the Baratie's hidden defensive capabilities and the chefs' determination to protect their home."
+    subtext: "The restaurant's transformation reveals that even places of nurture must be prepared for violence in this pirate era."
+  - title: "Pearl's Breaking Point"
+    what_was_said: "Blood?! I'm bleeding! This has never happened before! FIRE PEARL!"
+    why_this_matters: "Pearl's first injury triggers a dangerous fire-based counterattack, escalating the battle's stakes."
+    subtext: "The sight of his own blood shatters Pearl's self-image so completely that he'd rather burn everything than face his imperfection."
+  - title: "Gin's Desperate Gambit"
+    what_was_said: "I'm sorry, Sanji. But if you don't stop fighting... I'll have to kill this old man."
+    why_this_matters: "Gin taking Zeff hostage creates a moral dilemma that tests Sanji's priorities between victory and protecting his mentor."
+    subtext: "Gin's reluctant betrayal shows how loyalty to Krieg conflicts with his gratitude to Sanji, foreshadowing deeper character conflicts."
+themes:
+  - "The duality between creation and destruction"
+  - "Pride as both strength and vulnerability"
+  - "The cost of protecting what you love"
+  - "Loyalty tested by conflicting obligations"
+character_development:
+  - "Sanji reveals his fighting philosophy and unique combat style"
+  - "Pearl's obsession with perfection becomes his weakness"
+  - "Gin struggles between gratitude and pirate loyalty"
+  - "Krieg shows strategic thinking beyond mere brutality"
+world_building:
+  - "The Baratie has hidden defensive platforms for pirate attacks"
+  - "Grand Line navigation requires special knowledge and logbooks"
+  - "Even civilian establishments must be combat-ready in pirate-infested waters"
+  - "Different fighting styles emerge from different life philosophies"
+```

@@ -1,0 +1,57 @@
+Now I'll analyze episode 19 using my knowledge of One Piece and format it as requested YAML:
+
+```yaml
+episode: 19
+title: "The Three-Sword Style's Past! Zoro and Kuina's Vow!"
+air_date: "March 22, 2000"
+synopsis:
+  - "Zoro dreams of his childhood while the crew plays with cannons"
+  - "Flashback reveals Zoro's past as a dojo challenger"
+  - "Kuina defeats Zoro for the 2,000th time in their final duel"
+  - "Both vow to become the world's greatest swordsman"
+  - "Kuina's tragic death solidifies Zoro's unwavering dream"
+  - "Zoro inherits Kuina's sword and carries their shared promise"
+focal_points: "Roronoa Zoro, Kuina, Koushirou"
+pivotal_beats:
+  - title: "The Dojo Challenger"
+    what_was_said: "I challenge this dojo!"
+    why_this_matters: "Establishes Zoro's lifelong pattern of seeking strength through combat and never backing down from a challenge."
+    subtext: "Even as a child, Zoro was driven by an internal need to prove himself, foreshadowing his future role as the crew's combatant."
+  - title: "2,000 Defeats"
+    what_was_said: "That's 2,000 wins for me and 2,000 losses for you, Zoro."
+    why_this_matters: "Reveals the depth of Zoro's determination despite constant failure, and Kuina's superior skill."
+    subtext: "The specific number emphasizes that true strength comes from persistence, not innate talent - a core theme of Zoro's character."
+  - title: "Gender and Strength"
+    what_was_said: "When I get older and my body changes, I'll become weaker. I can never be the world's greatest swordsman."
+    why_this_matters: "Introduces the tragic limitation Kuina believes will prevent her from achieving her dream."
+    subtext: "This moment plants the seed of Zoro's future feminist ideals - he will never see gender as a barrier to strength."
+  - title: "The Sacred Promise"
+    what_was_said: "Let's make a promise. One of us will become the world's greatest swordsman!"
+    why_this_matters: "Creates the unbreakable vow that will drive Zoro's entire character arc throughout the series."
+    subtext: "This isn't just ambition - it's a sacred bond between kindred spirits that transcends death itself."
+  - title: "The Stairs of Fate"
+    what_was_said: "Kuina... fell down the stairs."
+    why_this_matters: "The mundane nature of her death contrasts sharply with her warrior spirit, making it more tragic."
+    subtext: "Life's fragility is emphasized - the strongest warrior can be defeated by everyday circumstances, not grand battles."
+  - title: "Inheriting the Dream"
+    what_was_said: "I'll become so strong that my name will reach the heavens!"
+    why_this_matters: "Zoro transforms personal grief into unshakeable resolve, doubling his burden and purpose."
+    subtext: "He must now fulfill two dreams as one - carrying Kuina's spirit forward while honoring their shared promise."
+  - title: "The Wado Ichimonji"
+    what_was_said: "Take this with you. It was Kuina's most prized possession."
+    why_this_matters: "The sword becomes a physical manifestation of Zoro's promise and connection to Kuina."
+    subtext: "Every battle Zoro fights with this sword is both for himself and for Kuina, making his journey deeply personal."
+themes:
+  - "Promises transcend death"
+  - "Strength through perseverance"
+  - "Gender equality in power"
+  - "The weight of inherited dreams"
+character_development:
+  - "Zoro's dream revealed as deeply personal, not just ambition"
+  - "His three-sword style explained as honoring Kuina's memory"
+  - "Foundation for his unwavering loyalty and determination"
+world_building:
+  - "Introduction to Shimotsuki Village and its dojo culture"
+  - "Establishes the concept of inherited swords and their significance"
+  - "Shows the traditional training methods of swordsmen"
+```

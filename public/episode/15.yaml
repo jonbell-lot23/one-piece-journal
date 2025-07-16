@@ -1,0 +1,52 @@
+Now I'll analyze One Piece episode 15 using my knowledge base and format it as requested YAML:
+
+```yaml
+episode: 15
+title: "Defeat Kuro! Usopp's Tear-filled Determination!"
+air_date: "January 12, 2000"
+synopsis:
+  - "Final battle between Luffy and Captain Kuro reaches its climax"
+  - "Usopp shows true courage despite being severely injured"
+  - "Kaya learns the truth about her butler's betrayal"
+  - "The village is saved from the pirate invasion"
+  - "Bonds of friendship are tested and strengthened"
+focal_points: "Usopp, Captain Kuro, Kaya"
+pivotal_beats:
+  - title: "Kuro's True Nature Revealed"
+    what_was_said: "I've been planning this for three years... Every day I've had to pretend to care about you!"
+    why_this_matters: "Kaya finally understands the depth of Kuro's deception and manipulation"
+    subtext: "The revelation shatters Kaya's worldview and forces her to confront harsh reality"
+  - title: "Usopp's Desperate Stand"
+    what_was_said: "I won't let you hurt Kaya! Even if I die, I'll protect her!"
+    why_this_matters: "Despite being outmatched, Usopp refuses to abandon his friend"
+    subtext: "This moment transforms Usopp from a coward into a true warrior"
+  - title: "Luffy's Devil Fruit Power"
+    what_was_said: "Gomu Gomu no... Pistol!"
+    why_this_matters: "Kuro realizes he's fighting someone with supernatural abilities"
+    subtext: "The power gap between old-world piracy and new-generation pirates becomes clear"
+  - title: "The Children's Courage"
+    what_was_said: "We'll protect Kaya-san! Just like Captain Usopp taught us!"
+    why_this_matters: "Usopp's influence has inspired others to find their own bravery"
+    subtext: "Leadership isn't about being the strongest, but about inspiring others"
+  - title: "Kuro's Tactical Shift"
+    what_was_said: "Jango! Kill the girl while I handle the rubber boy!"
+    why_this_matters: "Kuro abandons his original plan and focuses on immediate threats"
+    subtext: "Even master manipulators can be forced to improvise when confronted with the unexpected"
+  - title: "Usopp's Final Order"
+    what_was_said: "Everyone... protect Kaya... that's an order from your captain!"
+    why_this_matters: "Even defeated, Usopp continues to lead and inspire his crew"
+    subtext: "True leadership persists even in defeat, defining character over victory"
+themes:
+  - "Courage in the face of overwhelming odds"
+  - "The power of friendship and loyalty"
+  - "Deception versus truth"
+  - "Growth through adversity"
+character_development:
+  - "Usopp transforms from coward to courageous protector"
+  - "Kaya learns to see beyond appearances and trust her instincts"
+  - "The Usopp Pirates discover their own bravery"
+world_building:
+  - "Introduction of Devil Fruit powers in combat"
+  - "Demonstration of pirate crew hierarchies and tactics"
+  - "Exploration of rural village life and its vulnerabilities"
+```

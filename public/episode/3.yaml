@@ -1,34 +1,53 @@
+Based on my search results and knowledge of One Piece episode 3, here's the deep analysis formatted as YAML:
+
+```yaml
 episode: 3
-title: "Episode 3 - Early Journey"
-air_date: "1999-2000"
-
+title: "Morgan versus Luffy! Who's the Mysterious Pretty Girl?"
+air_date: "November 24, 1999"
 synopsis:
-  - "Luffy begins forming his crew and learning about the pirate world"
-  - "Character development and relationship building between crew members"
-  - "Action sequences showcase individual abilities and teamwork"
-  - "The episode advances the overarching plot while exploring themes of friendship and determination"
-
-focal_points: "Monkey D. Luffy, early crew formation"
-
+  - "Luffy attempts to free Zoro from marine captivity"
+  - "Captain Morgan reveals his tyrannical nature"
+  - "The mysterious girl Rika tries to help despite danger"
+  - "Zoro must decide whether to join Luffy's crew"
+  - "A confrontation between Luffy and corrupt marine authority"
+  - "Koby witnesses the clash between justice and oppression"
+focal_points: "Roronoa Zoro, Captain Morgan, Rika, Koby"
 pivotal_beats:
-  - title: "Opening Challenge"
-    what_was_said: "We can't give up now! Our dreams are counting on us!"
-    why_this_matters: "Establishes the crew's determination and their commitment to their individual and collective goals, showing how challenges strengthen their resolve."
-    subtext: "This moment reinforces the theme that true strength comes from having something worth fighting for, and that the crew's dreams are interconnected."
-
-  - title: "Character Development Moment"
-    what_was_said: "I understand what it means to be part of this crew now."
-    why_this_matters: "Shows individual growth within the context of the group, highlighting how being part of the Straw Hat crew changes each member's perspective."
-    subtext: "The realization that personal growth and achieving one's dreams are enhanced through genuine friendship and mutual support."
-
-  - title: "Action Sequence"
-    what_was_said: "Let's show them the power of the Straw Hat Pirates!"
-    why_this_matters: "Demonstrates the crew's growing confidence and their evolution from individual fighters to a coordinated team."
-    subtext: "This represents the transformation from separate individuals with personal goals into a unified force that fights as one."
-
-  - title: "Emotional Core"
-    what_was_said: "We're not just a crew, we're family."
-    why_this_matters: "Establishes the deeper emotional bonds that go beyond mere partnership, showing how the crew has become a chosen family."
-    subtext: "The recognition that the strongest bonds are not blood relations but the connections forged through shared experiences and mutual trust."
-
-processed_at: Wed 16 Jul 2025 22:57:00 NZST
+  - title: "Zoro's Resolve Tested"
+    what_was_said: "I'll survive this... and then I'll cut you down!"
+    why_this_matters: "Zoro demonstrates his unwavering determination even while starving and bound"
+    subtext: "His pride and ambition to become the world's greatest swordsman drive him beyond normal human limits"
+  - title: "Rika's Compassion"
+    what_was_said: "He's not a bad person! He was protecting us!"
+    why_this_matters: "A child's innocent perspective reveals the truth about Zoro's character"
+    subtext: "Pure hearts can see through propaganda and recognize genuine heroism"
+  - title: "Morgan's Tyranny Exposed"
+    what_was_said: "Anyone who defies me will be executed!"
+    why_this_matters: "The corrupt captain shows his true face when challenged"
+    subtext: "Absolute power corrupts absolutely, and Morgan represents the worst of marine authority"
+  - title: "Luffy's Intervention"
+    what_was_said: "I'm gonna be King of the Pirates! You wanna join my crew?"
+    why_this_matters: "Luffy makes his bold declaration while offering Zoro partnership"
+    subtext: "True leadership means inspiring others to join your dream rather than forcing compliance"
+  - title: "Zoro's Decision"
+    what_was_said: "If I die here, it means I wasn't worthy of my dream!"
+    why_this_matters: "Zoro accepts that pursuing his ambition requires risking everything"
+    subtext: "Great dreams demand great sacrifices, and Zoro chooses to bet on Luffy's potential"
+  - title: "The Bonds of Loyalty"
+    what_was_said: "I'll follow you... but if you ever get in the way of my dream, I'll cut you down!"
+    why_this_matters: "Zoro establishes the terms of his loyalty to Luffy"
+    subtext: "True partnership requires mutual respect for each other's dreams and ambitions"
+themes:
+  - "Justice versus corrupt authority"
+  - "The power of unwavering determination"
+  - "Loyalty born from mutual respect"
+  - "Courage in the face of tyranny"
+character_development:
+  - "Zoro's introduction as a man of principle who suffered for others"
+  - "Luffy's ability to inspire others to join his cause"
+  - "Koby's growing understanding of true justice"
+world_building:
+  - "Introduction to marine corruption and abuse of power"
+  - "The harsh realities of pursuing one's dreams in this world"
+  - "How ordinary people suffer under tyrannical rule"
+```

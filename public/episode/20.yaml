@@ -1,0 +1,53 @@
+Now I'll analyze episode 20 using my knowledge base and format it as requested YAML:
+
+```yaml
+episode: 20
+title: "The Famous Cook! Sanji of the Floating Restaurant"
+air_date: "April 12, 2000"
+synopsis:
+  - "Crew encounters Johnny and Yosaku, former bounty hunters"
+  - "Nami diagnoses Yosaku's scurvy, highlighting need for proper nutrition"
+  - "Decision made to seek a cook for the crew"
+  - "Introduction to Baratie floating restaurant"
+  - "Sanji confronts Marine Lieutenant Fullbody over food waste"
+focal_points: "Sanji, Johnny, Yosaku, Lieutenant Fullbody"
+pivotal_beats:
+  - title: "Yosaku's Illness Revelation"
+    what_was_said: "It's scurvy! A disease caused by lack of vitamin C in the diet."
+    why_this_matters: "Establishes the crew's vulnerability and need for proper nutrition management"
+    subtext: "Foreshadows Sanji's essential role as both cook and crew caretaker"
+  - title: "The Need for a Cook"
+    what_was_said: "We need someone who can cook for us properly. A chef!"
+    why_this_matters: "Crew recognizes their limitations and the necessity of expanding their roster"
+    subtext: "Shows the crew's growing awareness of what it takes to survive the Grand Line"
+  - title: "Sanji's First Appearance"
+    what_was_said: "Welcome to the Baratie! What can I get for you today?"
+    why_this_matters: "Introduces the future Straw Hat cook in his natural element"
+    subtext: "Establishes Sanji's hospitality and professionalism from the start"
+  - title: "Fullbody's Arrogance"
+    what_was_said: "There's a fly in my soup! I demand compensation!"
+    why_this_matters: "Sets up conflict that will reveal Sanji's principles about food"
+    subtext: "Represents the entitled attitude that Sanji despises in customers"
+  - title: "Food is Sacred"
+    what_was_said: "Don't you dare waste food! This soup was made with care!"
+    why_this_matters: "Reveals Sanji's core philosophy about respecting food and those who make it"
+    subtext: "Hints at deeper trauma and values that will define Sanji's character"
+  - title: "The Beating of Fullbody"
+    what_was_said: "You spilled the soup... now you'll pay for disrespecting food!"
+    why_this_matters: "Demonstrates Sanji's fighting ability and unwavering principles"
+    subtext: "Shows that Sanji will use violence to defend his beliefs about food's sanctity"
+themes:
+  - "Respect for food and those who prepare it"
+  - "The necessity of proper nutrition for survival"
+  - "Standing up for one's principles regardless of consequences"
+  - "Hospitality and service industry professionalism"
+character_development:
+  - "Sanji established as principled chef who won't tolerate food waste"
+  - "Crew recognizes their need for specialized skills"
+  - "Nami shows medical knowledge and leadership"
+world_building:
+  - "Introduction to Baratie, the floating restaurant"
+  - "Marine hierarchy and entitled officer behavior"
+  - "Bounty hunter culture through Johnny and Yosaku"
+  - "Health challenges of long sea voyages"
+```

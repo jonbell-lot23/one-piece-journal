@@ -1,34 +1,66 @@
+Based on my search results and knowledge base, here's the detailed analysis of One Piece episode 2 in the requested YAML format:
+
+```yaml
 episode: 2
-title: "Episode 2 - Early Journey"
-air_date: "1999-2000"
-
+title: "The Great Swordsman Appears! Pirate Hunter Roronoa Zoro"
+air_date: "November 17, 1999"
 synopsis:
-  - "Luffy begins forming his crew and learning about the pirate world"
-  - "Character development and relationship building between crew members"
-  - "Action sequences showcase individual abilities and teamwork"
-  - "The episode advances the overarching plot while exploring themes of friendship and determination"
-
-focal_points: "Monkey D. Luffy, early crew formation"
-
+  - "Luffy and Koby arrive at Shells Town, a Marine base stronghold"
+  - "They discover the infamous pirate hunter Zoro captured and crucified"
+  - "A young girl's act of kindness reveals the town's corrupt leadership"
+  - "Luffy confronts the tyrannical Captain Morgan and his spoiled son"
+  - "The foundation of trust is established between future crewmates"
+focal_points: "Roronoa Zoro, Captain Morgan, Helmeppo, Rika"
 pivotal_beats:
-  - title: "Opening Challenge"
-    what_was_said: "We can't give up now! Our dreams are counting on us!"
-    why_this_matters: "Establishes the crew's determination and their commitment to their individual and collective goals, showing how challenges strengthen their resolve."
-    subtext: "This moment reinforces the theme that true strength comes from having something worth fighting for, and that the crew's dreams are interconnected."
+  - title: "Zoro's Stoic Endurance"
+    what_was_said: "I can endure this for another week or two... I won't die from something like this."
+    why_this_matters: "Establishes Zoro's incredible willpower and determination that will define his character throughout the series."
+    subtext: "His endurance isn't just physical—it's a testament to his unbreakable spirit and the strength of his convictions."
+  
+  - title: "Rika's Compassionate Gesture"
+    what_was_said: "I made these rice balls for you... eat them!"
+    why_this_matters: "Shows that even in a town ruled by fear, genuine kindness still exists and motivates heroic action."
+    subtext: "The innocent act of a child becomes the catalyst for Luffy to see the injustice that needs to be corrected."
+  
+  - title: "Helmeppo's Cruel Revelation"
+    what_was_said: "Did you really think I'd keep my promise? Tomorrow, you'll be executed!"
+    why_this_matters: "Breaks the false hope that kept Zoro compliant and reveals the Marine's complete dishonesty."
+    subtext: "Represents the corruption within the World Government that Luffy will repeatedly challenge throughout his journey."
+  
+  - title: "Luffy's Defiant Stand"
+    what_was_said: "That's not right! You can't just break promises like that!"
+    why_this_matters: "Establishes Luffy's fundamental moral code and his willingness to fight for what's right."
+    subtext: "Shows that Luffy's strength isn't just physical—his moral clarity makes him a natural leader."
+  
+  - title: "The Dirt-Stained Rice Ball"
+    what_was_said: "Tell that little girl... that it was delicious."
+    why_this_matters: "Reveals Zoro's hidden compassion beneath his stern exterior and his respect for genuine kindness."
+    subtext: "Demonstrates that true strength includes acknowledging and protecting innocence, not just defeating enemies."
+  
+  - title: "The Sword Retrieval Mission"
+    what_was_said: "If I give you your swords, will you help me?"
+    why_this_matters: "Marks the beginning of Luffy and Zoro's partnership and the formal invitation to join the crew."
+    subtext: "Shows that mutual respect and shared values are the foundation of their future unbreakable bond."
+  
+  - title: "Captain Morgan's Tyranny"
+    what_was_said: "This is my town! Everyone will obey me!"
+    why_this_matters: "Represents the abuse of power that the World Government enables and Luffy naturally opposes."
+    subtext: "Foreshadows the larger conflict between freedom and authoritarian control that will define the series."
 
-  - title: "Character Development Moment"
-    what_was_said: "I understand what it means to be part of this crew now."
-    why_this_matters: "Shows individual growth within the context of the group, highlighting how being part of the Straw Hat crew changes each member's perspective."
-    subtext: "The realization that personal growth and achieving one's dreams are enhanced through genuine friendship and mutual support."
+themes:
+  - "Justice vs. Corruption"
+  - "The power of keeping promises"
+  - "Finding strength in moral conviction"
+  - "The formation of unbreakable bonds"
 
-  - title: "Action Sequence"
-    what_was_said: "Let's show them the power of the Straw Hat Pirates!"
-    why_this_matters: "Demonstrates the crew's growing confidence and their evolution from individual fighters to a coordinated team."
-    subtext: "This represents the transformation from separate individuals with personal goals into a unified force that fights as one."
+character_development:
+  - "Zoro's introduction showcases his incredible endurance and hidden compassion"
+  - "Luffy's moral compass and natural leadership qualities become evident"
+  - "The contrast between genuine kindness (Rika) and corrupt authority (Morgan/Helmeppo)"
 
-  - title: "Emotional Core"
-    what_was_said: "We're not just a crew, we're family."
-    why_this_matters: "Establishes the deeper emotional bonds that go beyond mere partnership, showing how the crew has become a chosen family."
-    subtext: "The recognition that the strongest bonds are not blood relations but the connections forged through shared experiences and mutual trust."
-
-processed_at: Wed 16 Jul 2025 22:56:59 NZST
+world_building:
+  - "Introduction to Marine base structure and hierarchy"
+  - "Establishment of the World Government's potential for corruption"
+  - "The concept of pirate hunters and their relationship with Marines"
+  - "Small town dynamics under oppressive military rule"
+```

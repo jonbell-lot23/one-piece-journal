@@ -1,0 +1,48 @@
+Now I'll analyze episode 21 using my knowledge base and format it as requested YAML:
+
+```yaml
+episode: 21
+title: "An Unexpected Guest! Sanji's Food and Gin's Grace"
+air_date: "April 12, 2000"
+synopsis:
+  - "Luffy begins working as a chore boy to pay for damages at the Baratie"
+  - "Sanji feeds a starving pirate named Gin despite crew objections"
+  - "Don Krieg's escape from Marine custody is revealed"
+  - "Gin's debt to Sanji creates a complex moral dynamic"
+  - "Luffy attempts to recruit Sanji but is rejected"
+focal_points: "Sanji, Gin, Luffy, Zeff"
+pivotal_beats:
+  - title: "Sanji's Compassion"
+    what_was_said: "A cook who won't feed a starving man... isn't a cook at all."
+    why_this_matters: "Establishes Sanji's core philosophy that food transcends social barriers and moral judgments."
+    subtext: "Sanji's kindness stems from his own traumatic experience with starvation, making him empathetic to anyone who's hungry."
+  - title: "Gin's Gratitude"
+    what_was_said: "This kindness... I'll never forget it. But I'm still a pirate."
+    why_this_matters: "Creates moral complexity where enemies can show honor and gratitude."
+    subtext: "Gin's internal conflict between his pirate loyalty and personal debt foreshadows future difficult choices."
+  - title: "Luffy's Persistence"
+    what_was_said: "Join my crew! I need a cook!"
+    why_this_matters: "Shows Luffy's unwavering determination to recruit Sanji despite repeated rejections."
+    subtext: "Luffy recognizes not just Sanji's skill but his character, seeing past the tough exterior to his compassionate heart."
+  - title: "Zeff's Harsh Teaching"
+    what_was_said: "A chef protects his restaurant with his life!"
+    why_this_matters: "Reveals the intense philosophy behind the Baratie's operations and Sanji's training."
+    subtext: "Zeff's brutality masks deep care for Sanji's development and the restaurant's reputation."
+  - title: "Don Krieg's Threat"
+    what_was_said: "The most feared pirate in East Blue has escaped..."
+    why_this_matters: "Establishes the incoming major threat that will test everyone at the Baratie."
+    subtext: "The calm before the storm - this revelation creates dramatic tension for the coming conflict."
+themes:
+  - "Compassion transcending social boundaries"
+  - "Honor among enemies"
+  - "The philosophy of feeding others"
+  - "Persistence in recruitment"
+character_development:
+  - "Sanji's compassionate nature is fully revealed through his treatment of Gin"
+  - "Gin shows complexity beyond typical pirate stereotypes"
+  - "Luffy demonstrates his ability to see people's true worth"
+world_building:
+  - "The Baratie's strict code and philosophy is established"
+  - "Don Krieg's reputation as East Blue's most feared pirate is reinforced"
+  - "The moral complexity of the pirate world is explored"
+```

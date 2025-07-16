@@ -92,7 +92,7 @@ export default function ReadPage() {
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
             One Piece Episodes
           </h2>
-          <div className="grid grid-cols-6 gap-1">
+          <div className="flex flex-wrap gap-0.5">
             {episodes.map((episode) => {
               const isViewed = viewedEpisodes.has(episode.episode);
               const isSelected = selectedEpisode?.episode === episode.episode;
@@ -102,7 +102,7 @@ export default function ReadPage() {
                   key={episode.episode}
                   onClick={() => handleEpisodeSelect(episode)}
                   className={`
-                    w-10 h-10 rounded cursor-pointer transition-all duration-150 flex items-center justify-center text-xs font-medium
+                    w-12 h-12 rounded cursor-pointer transition-all duration-150 flex items-center justify-center text-xs font-medium
                     ${
                       isSelected
                         ? "bg-blue-500 text-white"

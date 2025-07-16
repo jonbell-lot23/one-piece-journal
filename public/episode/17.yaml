@@ -1,0 +1,55 @@
+I need permission to write the file. Let me create the YAML content for Episode 17:
+
+```yaml
+episode: 17
+title: "Anger Explosion! Kuro vs. Luffy! How it Ends!"
+air_date: "March 8, 2000"
+synopsis:
+  - "Luffy's fierce battle with Captain Kuro reaches its climax"
+  - "Usopp defeats Django, saving Kaya from the assassination plot"
+  - "The Black Cat Pirates are expelled from Syrup Village"
+  - "Kaya rewards the Straw Hats with their first ship, the Going Merry"
+  - "The crew gains both a new vessel and deepened bonds"
+focal_points: "Luffy, Usopp, Kaya"
+pivotal_beats:
+  - title: "Luffy's Fury Against Kuro"
+    what_was_said: "I won't let you kill my friends! I'll beat you with everything I've got!"
+    why_this_matters: "Luffy demonstrates his core principle of protecting those he cares about, establishing his unwavering loyalty as a captain"
+    subtext: "This moment crystallizes Luffy's leadership philosophy - power exists to protect, not to dominate or manipulate like Kuro does"
+  - title: "Kuro's Disbelief"
+    what_was_said: "Impossible! How can a mere boy defeat my three-year plan? My perfect strategy!"
+    why_this_matters: "Kuro's meticulous planning crumbles before Luffy's straightforward determination, highlighting the clash between calculation and conviction"
+    subtext: "The defeat of Kuro's elaborate schemes by simple courage suggests that overthinking and manipulation are inferior to genuine strength and honest intentions"
+  - title: "Usopp's Moment of Truth"
+    what_was_said: "I may be a liar, but I won't let you harm Kaya! The Usopp Pirates will protect this village!"
+    why_this_matters: "Usopp transcends his cowardly nature to become a true protector, proving his worth beyond his tall tales"
+    subtext: "The village liar becomes the village hero, suggesting that even our perceived weaknesses can transform into strengths when protecting what matters"
+  - title: "Kaya's Gratitude"
+    what_was_said: "Please, take this ship as my thanks. May it carry you safely on your adventures. I'll never forget what you've done."
+    why_this_matters: "The Straw Hats receive their first ship, the Going Merry, marking a crucial milestone in their journey"
+    subtext: "The gift represents more than transportation - it's a symbol of trust, friendship, and the positive impact the crew has on those they help"
+  - title: "The Going Merry's Introduction"
+    what_was_said: "She's a caravel with a sheep figurehead. Please take good care of her - she's been special to me."
+    why_this_matters: "The Going Merry enters the story not just as a ship but as a character with its own significance and future role"
+    subtext: "The personal connection Kaya has with the ship foreshadows how the Going Merry will become a beloved crew member rather than mere transportation"
+  - title: "Departure and New Beginnings"
+    what_was_said: "Set sail! With this ship, we can go anywhere! The Grand Line is waiting for us!"
+    why_this_matters: "The crew's excitement about their new vessel represents a major step forward in their pirate journey"
+    subtext: "Having a proper ship transforms them from island-hoppers to true seafarers, ready to face the greater challenges ahead"
+themes:
+  - "Strength through protecting others versus strength through manipulation"
+  - "The power of simple conviction over complex scheming"
+  - "Transformation through courage - becoming who you need to be"
+  - "Gratitude and reward for selfless actions"
+  - "The beginning of true adventure with proper tools"
+character_development:
+  - "Luffy solidifies his role as a captain who fights for his friends"
+  - "Usopp proves his bravery when it truly matters, moving beyond mere boasting"
+  - "Kaya shows strength in her gratitude and trust in the Straw Hats"
+  - "The crew dynamic strengthens through shared victory"
+world_building:
+  - "Introduction of the Going Merry as the Straw Hats' first real pirate ship"
+  - "Establishment of how the crew positively impacts the places they visit"
+  - "Demonstration that elaborate pirate schemes can be defeated by determination"
+  - "The tradition of ships as cherished companions begins with Kaya's personal connection to the Going Merry"
+```
