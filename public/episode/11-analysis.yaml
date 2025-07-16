@@ -1,0 +1,52 @@
+episode: 11
+title: "Episode 11 Title Placeholder"
+air_date: "Unknown"
+
+synopsis:
+  - "Summary point 1 for episode 11."
+  - "Summary point 2 for episode 11."
+  - "Summary point 3 for episode 11."
+  - "Summary point 4 for episode 11."
+
+focal_points: "Main character or theme focus for episode 11."
+
+pivotal_beats:
+  - title: "Pivotal moment 1"
+    what_was_said: "Key quote or action."
+    why_this_matters: "Why this moment is important."
+    subtext: "Deeper meaning or implication."
+  - title: "Pivotal moment 2"
+    what_was_said: "Key quote or action."
+    why_this_matters: "Why this moment is important."
+    subtext: "Deeper meaning or implication."
+  - title: "Pivotal moment 3"
+    what_was_said: "Key quote or action."
+    why_this_matters: "Why this moment is important."
+    subtext: "Deeper meaning or implication."
+  - title: "Pivotal moment 4"
+    what_was_said: "Key quote or action."
+    why_this_matters: "Why this moment is important."
+    subtext: "Deeper meaning or implication."
+  - title: "Pivotal moment 5"
+    what_was_said: "Key quote or action."
+    why_this_matters: "Why this moment is important."
+    subtext: "Deeper meaning or implication."
+
+themes:
+  - "Theme 1 for episode 11."
+  - "Theme 2 for episode 11."
+  - "Theme 3 for episode 11."
+  - "Theme 4 for episode 11."
+  - "Theme 5 for episode 11."
+
+character_development:
+  - "Character development point 1."
+  - "Character development point 2."
+  - "Character development point 3."
+  - "Character development point 4."
+
+world_building:
+  - "World building point 1."
+  - "World building point 2."
+  - "World building point 3."
+  - "World building point 4."
