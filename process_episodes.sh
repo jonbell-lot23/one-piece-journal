@@ -79,81 +79,35 @@ you will produce:
 
 Now analyze episodes $start_episode-$end_episode. For each episode, provide the analysis in the exact format specified above. After completing all episodes, output the YAML format for each episode that can be saved as episode files ($start_episode.yaml, $((start_episode+1)).yaml, etc.)."
 
-    # Skip Claude analysis and create structured placeholder files
+    # Run Claude analysis and save output
     local output_file="temp_batch_${start_episode}_${end_episode}.txt"
-    echo "🤖 Creating structured episode files for episodes $start_episode-$end_episode..."
+    echo "🤖 Running Claude analysis for episodes $start_episode-$end_episode..."
     
-    # Create properly structured episode files with episode-specific content
-    for episode_num in $(seq $start_episode $end_episode); do
-        echo "📝 Creating episode $episode_num YAML file..."
-        
-        # Create episode-specific content based on episode number ranges
-        local title="Episode $episode_num"
-        local synopsis1="Straw Hat Pirates continue their journey"
-        local synopsis2="Character development and crew dynamics"
-        local synopsis3="Adventure and challenges in the Grand Line"
-        local focal_character="Monkey D. Luffy"
-        
-        # Customize based on episode ranges (rough One Piece arcs)
-        if [ $episode_num -le 50 ]; then
-            focal_character="Luffy, Zoro, Nami, Usopp, Sanji"
-            synopsis1="Early adventures and crew formation"
-        elif [ $episode_num -le 100 ]; then
-            focal_character="Straw Hat Crew, Baroque Works"
-            synopsis1="Alabasta Saga adventures"
-        elif [ $episode_num -le 200 ]; then
-            focal_character="Straw Hat Crew, Sky Island residents"
-            synopsis1="Sky Island and Water 7 adventures"
-        elif [ $episode_num -le 300 ]; then
-            focal_character="Straw Hat Crew, Enies Lobby"
-            synopsis1="Enies Lobby and Thriller Bark adventures"
-        elif [ $episode_num -le 400 ]; then
-            focal_character="Straw Hat Crew, Impel Down"
-            synopsis1="Sabaody and Marineford War era"
-        else
-            focal_character="Straw Hat Crew, New World"
-            synopsis1="New World adventures and challenges"
-        fi
-        
-        cat > "public/episode/$episode_num.yaml" << EOF
-episode: $episode_num
-title: "$title"
-air_date: "unknown"
-
-synopsis:
-  - "$synopsis1"
-  - "$synopsis2"
-  - "$synopsis3"
-  - "Plot progression and world building"
-
-focal_points: "$focal_character"
-
-pivotal_beats:
-  - title: "Opening Moment"
-    what_was_said: "Episode $episode_num key dialogue"
-    why_this_matters: "Establishes the episode's central conflict or theme"
-    subtext: "Character growth and story development"
-
-  - title: "Mid-Episode Development"
-    what_was_said: "Character interaction and plot advancement"
-    why_this_matters: "Moves the narrative forward and develops relationships"
-    subtext: "Deeper exploration of One Piece themes"
-
-  - title: "Climactic Moment"
-    what_was_said: "Pivotal action or revelation"
-    why_this_matters: "Resolves episode conflict and sets up future events"
-    subtext: "Demonstrates character values and determination"
-EOF
-        
-        if [ -f "public/episode/$episode_num.yaml" ]; then
-            echo "✅ Created public/episode/$episode_num.yaml"
-        else
-            echo "❌ Failed to create public/episode/$episode_num.yaml"
-        fi
-    done
+    # Run Claude and capture output
+    claude --print --model sonnet "$prompt" > "$output_file" 2>&1
     
-    echo "Episode analysis complete for episodes $start_episode-$end_episode" > "$output_file"
-    echo "✅ Episode files created with structured content"
+    echo ""
+    echo "📋 CLAUDE OUTPUT:"
+    echo "================="
+    cat "$output_file"
+    echo "================="
+    echo ""
+    
+    # Check if output is blank or too short
+    if [ ! -s "$output_file" ] || [ $(wc -l < "$output_file") -lt 10 ]; then
+        echo "❌ Claude output is blank or too short. Skipping this batch."
+        echo "💤 Waiting 10 seconds before trying again..."
+        sleep 10
+        return 1
+    fi
+    
+    echo "✅ Claude analysis complete. Output saved to $output_file"
+    echo "⏳ Waiting 2 seconds for review..."
+    sleep 2
+    
+    # TODO: Add actual YAML extraction logic here
+    # For now, the script will continue but won't create proper YAML files
+    echo "⚠️  YAML extraction not implemented yet - analysis saved to $output_file"
     
     # Verify files were created
     local missing_files=0
