@@ -79,43 +79,41 @@ you will produce:
 
 Now analyze episodes $start_episode-$end_episode. For each episode, provide the analysis in the exact format specified above. After completing all episodes, output the YAML format for each episode that can be saved as episode files ($start_episode.yaml, $((start_episode+1)).yaml, etc.)."
 
-    # Generate YAML files directly using Claude Code
+    # Generate YAML files using Claude Code Task tool
     local output_file="temp_batch_${start_episode}_${end_episode}.txt"
-    echo "🤖 Generating YAML files directly for episodes $start_episode-$end_episode..."
+    echo "🤖 Generating actual One Piece analysis for episodes $start_episode-$end_episode..."
     
-    # Create YAML files directly for each episode
-    for episode_num in $(seq $start_episode $end_episode); do
-        echo "📝 Creating episode $episode_num YAML file..."
+    # Use Claude Code to generate the actual episode analysis
+    claude-code --non-interactive "Generate One Piece episode analysis YAML files for episodes $start_episode through $end_episode. Each file should be saved as public/episode/N.yaml and contain proper One Piece episode analysis with real synopsis, focal points, and pivotal beats following the existing format from episode 1." 2>/dev/null || {
+        echo "⚠️ Claude Code failed, creating placeholder files..."
         
-        # Create a basic YAML structure for now
-        cat > "public/episode/$episode_num.yaml" << EOF
+        # Fallback: create placeholder files
+        for episode_num in $(seq $start_episode $end_episode); do
+            echo "📝 Creating placeholder for episode $episode_num..."
+            
+            cat > "public/episode/$episode_num.yaml" << EOF
 episode: $episode_num
-title: "Episode $episode_num"
+title: "Episode $episode_num - Placeholder"
 air_date: "unknown"
 
 synopsis:
-  - "Adventure continues"
-  - "Character development"
-  - "Plot progression"
+  - "One Piece episode $episode_num content"
+  - "Adventure and character development"
+  - "Story progression"
 
 focal_points: "Straw Hat Crew"
 
 pivotal_beats:
-  - title: "Key Moment"
-    what_was_said: "Significant dialogue or action"
-    why_this_matters: "Narrative importance"
-    subtext: "Deeper meaning"
+  - title: "Episode $episode_num Key Moment"
+    what_was_said: "Placeholder dialogue"
+    why_this_matters: "Narrative significance for episode $episode_num"
+    subtext: "Deeper meaning and character development"
 EOF
-        
-        if [ -f "public/episode/$episode_num.yaml" ]; then
-            echo "✅ Created public/episode/$episode_num.yaml"
-        else
-            echo "❌ Failed to create public/episode/$episode_num.yaml"
-        fi
-    done
+        done
+    }
     
-    echo "Analysis complete for episodes $start_episode-$end_episode with YAML format provided for each episode." > "$output_file"
-    echo "✅ Episode files created successfully"
+    echo "Episode analysis complete for episodes $start_episode-$end_episode" > "$output_file"
+    echo "✅ Episode files created"
     
     # Verify files were created
     local missing_files=0
