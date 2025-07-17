@@ -46,8 +46,11 @@ export default function Home() {
       try {
         const viewedArray: number[] = JSON.parse(savedViewed);
         if (viewedArray.length > 0) {
-          const latest = Math.max(...viewedArray);
-          router.replace(`/read/${latest}?banner=1`);
+          const search = new URLSearchParams(window.location.search);
+          if (search.get("noredirect") !== "1") {
+            const latest = Math.max(...viewedArray);
+            router.replace(`/read/${latest}?banner=1`);
+          }
         }
       } catch (e) {
         console.error("Failed to parse viewed episodes", e);
