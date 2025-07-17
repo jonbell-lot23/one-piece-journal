@@ -39,6 +39,33 @@ export default function Home() {
     }
   }, []);
 
+  // When landing on the site, automatically open the most recently read episode
+  // but avoid redirecting if coming from an episode page or when explicitly
+  // disabled via the `noRedirect` query parameter.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("noRedirect") === "1") {
+      return;
+    }
+
+    if (document.referrer.includes("/read/")) {
+      return;
+    }
+
+    const savedViewed = localStorage.getItem("viewedEpisodes");
+    if (savedViewed) {
+      try {
+        const viewedArray: number[] = JSON.parse(savedViewed);
+        if (viewedArray.length > 0) {
+          const latest = Math.max(...viewedArray);
+          router.replace(`/read/${latest}?banner=1`);
+        }
+      } catch (e) {
+        console.error("Failed to parse viewed episodes", e);
+      }
+    }
+  }, []);
+
   useEffect(() => {
     const fetchEpisodes = async () => {
       try {
