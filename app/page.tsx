@@ -46,6 +46,12 @@ export default function Home() {
         if (response.ok) {
           const data = await response.json();
           setEpisodes(data);
+          // Cache episodes so reading pages can load them offline
+          try {
+            localStorage.setItem("allEpisodes", JSON.stringify(data));
+          } catch (e) {
+            console.error("Failed to cache episodes", e);
+          }
         } else {
           console.error("Failed to fetch episodes");
         }
