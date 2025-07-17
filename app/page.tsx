@@ -179,7 +179,7 @@ export default function Home() {
       {/* Mobile Navigation Strip */}
       <div className="lg:hidden bg-gray-100 p-4 border-b">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-semibold text-gray-800 font-['Cochin','Georgia',serif]">
+          <h2 className="text-base font-semibold text-gray-800 font-['Cochin','Georgia',serif]">
             Episode {selectedEpisode?.episode || "Loading..."}
           </h2>
           <div className="flex gap-2">
@@ -228,12 +228,24 @@ export default function Home() {
 
         {/* Mobile Menu */}
         {showMenu && (
-          <div className="absolute top-16 right-4 bg-white border rounded-lg shadow-lg p-3 z-10">
+          <div className="absolute top-16 right-4 bg-white border rounded-lg shadow-lg p-3 z-10 min-w-[180px] flex flex-col gap-1">
             <button
-              onClick={() => setShowAllEpisodes(!showAllEpisodes)}
-              className="block w-full text-left px-3 py-2 text-sm text-gray-700 bg-gray-50 rounded"
+              onClick={() => {
+                setShowAllEpisodes(!showAllEpisodes);
+                setShowMenu(false);
+              }}
+              className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded"
             >
               {showAllEpisodes ? "Hide All Episodes" : "Show All Episodes"}
+            </button>
+            <button
+              onClick={() => {
+                setShowSearch((prev) => !prev);
+                setShowMenu(false);
+              }}
+              className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded"
+            >
+              {showSearch ? "Hide Search" : "Search"}
             </button>
             <button
               onClick={clearViewedEpisodes}
@@ -241,6 +253,40 @@ export default function Home() {
             >
               Clear Viewed
             </button>
+          </div>
+        )}
+
+        {/* Mobile Search Input */}
+        {showSearch && (
+          <div className="mb-4 relative">
+            <input
+              type="text"
+              placeholder="Search episodes..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+              autoFocus
+            />
+            {searchQuery && (
+              <button
+                onClick={clearSearch}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            )}
           </div>
         )}
 
@@ -395,17 +441,17 @@ export default function Home() {
           {selectedEpisode && (
             <div className="max-w-none">
               <div className="mb-0">
-                <h1
-                  className="text-3xl lg:text-4xl font-bold text-gray-900 mb-0"
-                  style={{ marginBottom: "0", paddingBottom: "0" }}
-                >
-                  {selectedEpisode.episode}: {selectedEpisode.title}
+                <div className="text-sm text-gray-500 mb-1">
+                  Episode {selectedEpisode.episode}
+                </div>
+                <h1 className="text-2xl lg:text-4xl font-bold text-gray-900 mb-6">
+                  {selectedEpisode.title}
                 </h1>
               </div>
 
-              <div className="mb-6 mt-6 lg:mt-4 lg:ml-8">
+              <div className="mb-6 mt-4 lg:mt-4 lg:ml-8">
                 <ul
-                  className="list-disc list-inside text-gray-700 text-xl lg:text-lg leading-relaxed space-y-2 lg:space-y-0.5 mt-0 pt-0 custom-synopsis-list"
+                  className="list-disc list-inside text-gray-700 text-base lg:text-lg leading-relaxed space-y-4 lg:space-y-2 mt-0 pt-0 custom-synopsis-list"
                   style={{ marginTop: "0", paddingTop: "0" }}
                 >
                   {selectedEpisode.synopsis.map((point, index) => (
@@ -440,40 +486,37 @@ export default function Home() {
               <div>
                 {selectedEpisode.pivotal_beats &&
                 selectedEpisode.pivotal_beats.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-8">
                     {selectedEpisode.pivotal_beats.map((beat, index) => (
-                      <div
-                        key={index}
-                        className="bg-gray-50 rounded-lg border p-4 hover:shadow-md transition-shadow"
-                      >
-                        <h6 className="font-semibold text-gray-800 mb-4 text-lg lg:text-xl">
+                      <div key={index}>
+                        <h6 className="font-semibold text-gray-800 mb-2 text-lg lg:text-xl">
                           {index + 1}. {beat.title}
                         </h6>
                         <div className="space-y-4">
                           <div>
-                            <span className="font-semibold text-gray-700 text-base">
+                            <span className="font-semibold text-gray-700 text-base lg:text-base">
                               WHAT WAS SAID:
                             </span>
                             <br />
-                            <span className="text-gray-600 text-base">
+                            <span className="text-gray-600 text-base lg:text-lg">
                               {beat.what_was_said}
                             </span>
                           </div>
                           <div>
-                            <span className="font-semibold text-gray-700 text-base">
+                            <span className="font-semibold text-gray-700 text-base lg:text-base">
                               WHY THIS MATTERS:
                             </span>
                             <br />
-                            <span className="text-gray-600 text-base">
+                            <span className="text-gray-600 text-base lg:text-lg">
                               {beat.why_this_matters}
                             </span>
                           </div>
                           <div>
-                            <span className="font-semibold text-gray-700 text-base">
+                            <span className="font-semibold text-gray-700 text-base lg:text-base">
                               THE SUBTEXT:
                             </span>
                             <br />
-                            <span className="text-gray-600 text-base">
+                            <span className="text-gray-600 text-base lg:text-lg">
                               {beat.subtext}
                             </span>
                           </div>
@@ -482,7 +525,7 @@ export default function Home() {
                     ))}
                   </div>
                 ) : (
-                  <div className="text-gray-500 italic text-base">
+                  <div className="text-gray-500 italic text-base lg:text-lg">
                     No pivotal beats data available for this episode.
                   </div>
                 )}
