@@ -172,7 +172,7 @@ export default function EpisodePage() {
               {episode.focal_points.split(", ").map((character, index) => (
                 <span
                   key={index}
-                  className="font-semibold underline text-base lg:text-sm font-[Inter,sans-serif]"
+                  className="bg-black text-white px-3 py-1 rounded-full text-sm font-['Inter',sans-serif]"
                 >
                   {character}
                 </span>
@@ -182,37 +182,40 @@ export default function EpisodePage() {
 
           <div>
             {episode.pivotal_beats && episode.pivotal_beats.length > 0 ? (
-              <div className="flex flex-col gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {episode.pivotal_beats.map((beat, index) => (
-                  <div key={index}>
-                    <h6 className="font-semibold text-gray-800 text-lg lg:text-xl">
+                  <div
+                    key={index}
+                    className="bg-gray-50 rounded-lg border p-4 hover:shadow-md transition-shadow"
+                  >
+                    <h6 className="font-semibold text-gray-800 mb-4 text-xl">
                       {index + 1}. {beat.title}
                     </h6>
                     <div className="space-y-4">
                       <div>
-                        <span className="font-semibold text-gray-700 text-base lg:text-base">
+                        <span className="font-semibold text-gray-700 text-base">
                           WHAT WAS SAID:
                         </span>
                         <br />
-                        <span className="text-gray-600 text-base lg:text-lg">
+                        <span className="text-gray-600 text-base">
                           {beat.what_was_said}
                         </span>
                       </div>
                       <div>
-                        <span className="font-semibold text-gray-700 text-base lg:text-base">
+                        <span className="font-semibold text-gray-700 text-base">
                           WHY THIS MATTERS:
                         </span>
                         <br />
-                        <span className="text-gray-600 text-base lg:text-lg">
+                        <span className="text-gray-600 text-base">
                           {beat.why_this_matters}
                         </span>
                       </div>
                       <div>
-                        <span className="font-semibold text-gray-700 text-base lg:text-base">
+                        <span className="font-semibold text-gray-700 text-base">
                           THE SUBTEXT:
                         </span>
                         <br />
-                        <span className="text-gray-600 text-base lg:text-lg">
+                        <span className="text-gray-600 text-base">
                           {beat.subtext}
                         </span>
                       </div>
