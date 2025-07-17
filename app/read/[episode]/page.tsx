@@ -27,9 +27,29 @@ export default function EpisodePage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchEpisode = async () => {
+    const loadEpisode = async () => {
       try {
-        const episodeNumber = params.episode;
+        const episodeNumber = Number(params.episode);
+
+        // Try to load from cached episodes first
+        const cached = localStorage.getItem("allEpisodes");
+        if (cached) {
+          try {
+            const allEpisodes: EpisodeAnalysis[] = JSON.parse(cached);
+            const cachedEpisode = allEpisodes.find(
+              (ep) => ep.episode === episodeNumber
+            );
+            if (cachedEpisode) {
+              setEpisode(cachedEpisode);
+              setLoading(false);
+              return;
+            }
+          } catch (e) {
+            console.error("Failed to parse cached episodes", e);
+          }
+        }
+
+        // Fallback to API request
         const response = await fetch(`/api/episode-analysis/${episodeNumber}`);
 
         if (response.ok) {
@@ -47,7 +67,7 @@ export default function EpisodePage() {
     };
 
     if (params.episode) {
-      fetchEpisode();
+      loadEpisode();
     }
   }, [params.episode]);
 
