@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Masonry from "@/components/masonry";
 
 interface EpisodeAnalysis {
@@ -20,9 +21,8 @@ interface EpisodeAnalysis {
 }
 
 export default function Home() {
+  const router = useRouter();
   const [episodes, setEpisodes] = useState<EpisodeAnalysis[]>([]);
-  const [selectedEpisode, setSelectedEpisode] =
-    useState<EpisodeAnalysis | null>(null);
   const [viewedEpisodes, setViewedEpisodes] = useState<Set<number>>(new Set());
   const [loading, setLoading] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
@@ -46,9 +46,6 @@ export default function Home() {
         if (response.ok) {
           const data = await response.json();
           setEpisodes(data);
-          if (data.length > 0) {
-            setSelectedEpisode(data[0]);
-          }
         } else {
           console.error("Failed to fetch episodes");
         }
@@ -113,8 +110,6 @@ export default function Home() {
   }, [searchQuery, episodes]);
 
   const handleEpisodeSelect = (episode: EpisodeAnalysis) => {
-    setSelectedEpisode(episode);
-
     // Mark episode as viewed
     const newViewed = new Set(viewedEpisodes);
     newViewed.add(episode.episode);
@@ -125,6 +120,9 @@ export default function Home() {
       "viewedEpisodes",
       JSON.stringify(Array.from(newViewed))
     );
+
+    // Navigate to reading page
+    router.push(`/read/${episode.episode}`);
   };
 
   const clearViewedEpisodes = () => {
@@ -140,11 +138,11 @@ export default function Home() {
   };
 
   const getCurrentEpisodeIndex = () => {
-    return episodes.findIndex((ep) => ep.episode === selectedEpisode?.episode);
+    return episodes.findIndex((ep) => ep.episode === episodes[0]?.episode);
   };
 
   const getMobileEpisodes = () => {
-    if (!selectedEpisode) return [];
+    if (episodes.length === 0) return [];
 
     const currentIndex = getCurrentEpisodeIndex();
     const start = Math.max(0, currentIndex - 3);
@@ -196,7 +194,6 @@ export default function Home() {
           <div className="flex gap-1 overflow-x-auto pb-2">
             {getMobileEpisodes().map((episode) => {
               const isViewed = viewedEpisodes.has(episode.episode);
-              const isSelected = selectedEpisode?.episode === episode.episode;
 
               return (
                 <div
@@ -205,11 +202,9 @@ export default function Home() {
                   className={`
                     flex-shrink-0 w-10 h-10 rounded cursor-pointer transition-all duration-150 flex items-center justify-center text-xs font-medium ${getEpisodeOpacity(episode.episode)}
                     ${
-                      isSelected
-                        ? "bg-blue-500 text-white"
-                        : isViewed
-                          ? "bg-black text-white hover:bg-gray-800"
-                          : "bg-white text-black border border-gray-300 hover:bg-gray-50"
+                      isViewed
+                        ? "bg-black text-white hover:bg-gray-800"
+                        : "bg-white text-black border border-gray-300 hover:bg-gray-50"
                     }
                   `}
                   title={`Episode ${episode.episode}: ${episode.title}`}
@@ -290,7 +285,6 @@ export default function Home() {
           <div className="flex flex-wrap gap-0.5">
             {episodes.map((episode) => {
               const isViewed = viewedEpisodes.has(episode.episode);
-              const isSelected = selectedEpisode?.episode === episode.episode;
 
               return (
                 <div
@@ -299,11 +293,9 @@ export default function Home() {
                   className={`
                     w-10 h-10 rounded cursor-pointer transition-all duration-150 flex items-center justify-center text-xs font-medium ${getEpisodeOpacity(episode.episode)}
                     ${
-                      isSelected
-                        ? "bg-blue-500 text-white"
-                        : isViewed
-                          ? "bg-black text-white hover:bg-gray-800"
-                          : "bg-white text-black border border-gray-300 hover:bg-gray-50"
+                      isViewed
+                        ? "bg-black text-white hover:bg-gray-800"
+                        : "bg-white text-black border border-gray-300 hover:bg-gray-50"
                     }
                   `}
                   title={`Episode ${episode.episode}: ${episode.title}`}
@@ -317,7 +309,7 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4">
-        {/* Episode Grid - Left Side (Desktop) - Made narrower */}
+        {/* Episode Grid - Left Side (Desktop) */}
         <div className="hidden lg:block lg:col-span-1 bg-gray-100 p-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold text-gray-800 font-['Cochin','Georgia',serif]">
@@ -361,7 +353,7 @@ export default function Home() {
                       onClick={clearViewedEpisodes}
                       className="block w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded"
                     >
-                      Clear
+                      Clear Viewed
                     </button>
                   </div>
                 )}
@@ -406,7 +398,6 @@ export default function Home() {
           <div className="flex flex-wrap gap-0.5">
             {episodes.map((episode) => {
               const isViewed = viewedEpisodes.has(episode.episode);
-              const isSelected = selectedEpisode?.episode === episode.episode;
 
               return (
                 <div
@@ -415,11 +406,9 @@ export default function Home() {
                   className={`
                     w-12 h-12 rounded cursor-pointer transition-all duration-150 flex items-center justify-center text-xs font-medium ${getEpisodeOpacity(episode.episode)}
                     ${
-                      isSelected
-                        ? "bg-blue-500 text-white"
-                        : isViewed
-                          ? "bg-black text-white hover:bg-gray-800"
-                          : "bg-white text-black border border-gray-300 hover:bg-gray-50"
+                      isViewed
+                        ? "bg-black text-white hover:bg-gray-800"
+                        : "bg-white text-black border border-gray-300 hover:bg-gray-50"
                     }
                   `}
                   title={`Episode ${episode.episode}: ${episode.title}`}
@@ -431,102 +420,17 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Episode Content - Right Side - Kindle-style reading experience */}
-        <div className="w-full lg:col-span-3 pt-8 pb-8 px-4 lg:pt-16 lg:pb-8 lg:pl-16 lg:pr-8 font-['Cochin','Georgia',serif]">
-          {selectedEpisode && (
-            <div className="max-w-none">
-              <div className="mb-0">
-                <div className="text-sm text-gray-500 mb-1">
-                  Episode {selectedEpisode.episode}
-                </div>
-                <h1 className="text-2xl lg:text-4xl font-bold text-gray-900 mb-6">
-                  {selectedEpisode.title}
-                </h1>
-              </div>
-
-              <div className="mb-6 mt-4 lg:mt-4 lg:ml-8">
-                <ul
-                  className="list-disc list-inside text-gray-700 text-base lg:text-lg leading-relaxed space-y-4 lg:space-y-2 mt-0 pt-0 custom-synopsis-list"
-                  style={{ marginTop: "0", paddingTop: "0" }}
-                >
-                  {selectedEpisode.synopsis.map((point, index) => (
-                    <li
-                      key={index}
-                      className={index === 0 ? "mt-0 pt-0" : ""}
-                      style={
-                        index === 0 ? { marginTop: "0", paddingTop: "0" } : {}
-                      }
-                    >
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="mb-6">
-                <div className="flex flex-wrap gap-2">
-                  {selectedEpisode.focal_points
-                    .split(", ")
-                    .map((character, index) => (
-                      <span
-                        key={index}
-                        className="bg-black text-white px-3 py-1 rounded-full text-base lg:text-sm font-['Inter',sans-serif]"
-                      >
-                        {character}
-                      </span>
-                    ))}
-                </div>
-              </div>
-
-              <div>
-                {selectedEpisode.pivotal_beats &&
-                selectedEpisode.pivotal_beats.length > 0 ? (
-                  <div className="flex flex-col gap-8">
-                    {selectedEpisode.pivotal_beats.map((beat, index) => (
-                      <div key={index}>
-                        <h6 className="font-semibold text-gray-800 mb-2 text-lg lg:text-xl">
-                          {index + 1}. {beat.title}
-                        </h6>
-                        <div className="space-y-4">
-                          <div>
-                            <span className="font-semibold text-gray-700 text-base lg:text-base">
-                              WHAT WAS SAID:
-                            </span>
-                            <br />
-                            <span className="text-gray-600 text-base lg:text-lg">
-                              {beat.what_was_said}
-                            </span>
-                          </div>
-                          <div>
-                            <span className="font-semibold text-gray-700 text-base lg:text-base">
-                              WHY THIS MATTERS:
-                            </span>
-                            <br />
-                            <span className="text-gray-600 text-base lg:text-lg">
-                              {beat.why_this_matters}
-                            </span>
-                          </div>
-                          <div>
-                            <span className="font-semibold text-gray-700 text-base lg:text-base">
-                              THE SUBTEXT:
-                            </span>
-                            <br />
-                            <span className="text-gray-600 text-base lg:text-lg">
-                              {beat.subtext}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-gray-500 italic text-base lg:text-lg">
-                    No pivotal beats data available for this episode.
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
+        {/* Main Content Area - Now just shows a welcome message */}
+        <div className="lg:col-span-3 pt-8 pb-8 px-4 lg:pt-16 lg:pb-8 lg:pl-16 lg:pr-8 font-['Cochin','Georgia',serif]">
+          <div className="max-w-none">
+            <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+              One Piece Episode Journal
+            </h1>
+            <p className="text-lg lg:text-xl text-gray-700 leading-relaxed">
+              Click on any episode number to read the detailed analysis and
+              pivotal moments.
+            </p>
+          </div>
         </div>
       </div>
     </div>
