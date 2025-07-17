@@ -178,22 +178,17 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       {/* Mobile Navigation Strip */}
       <div className="lg:hidden bg-gray-100 p-4 border-b">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-base font-semibold text-gray-800 font-['Cochin','Georgia',serif]">
-            Episode {selectedEpisode?.episode || "Loading..."}
-          </h2>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setShowMenu(!showMenu)}
-              className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center"
-            >
-              <div className="flex flex-col gap-0.5">
-                <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
-                <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
-                <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
-              </div>
-            </button>
-          </div>
+        <div className="flex items-center justify-end mb-3">
+          <button
+            onClick={() => setShowMenu(!showMenu)}
+            className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center"
+          >
+            <div className="flex flex-col gap-0.5">
+              <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
+              <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
+              <div className="w-1 h-1 bg-gray-600 rounded-full"></div>
+            </div>
+          </button>
         </div>
 
         {/* Mobile Episode Strip */}
