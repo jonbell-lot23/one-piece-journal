@@ -128,7 +128,7 @@ export default function EpisodePage() {
       <div className="lg:hidden bg-gray-100 border-b">
         <div className="flex items-center justify-between">
           <button
-            onClick={() => router.push("/")}
+            onClick={() => router.push("/?noredirect=1")}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-800"
           >
             <svg
@@ -153,7 +153,7 @@ export default function EpisodePage() {
       <div className="hidden lg:block bg-gray-100 border-b">
         <div className="flex items-center justify-between">
           <button
-            onClick={() => router.push("/")}
+            onClick={() => router.push("/?noredirect=1")}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-800"
           >
             <svg
@@ -294,7 +294,7 @@ export default function EpisodePage() {
               </button>
 
               <button
-                onClick={() => router.push("/")}
+                onClick={() => router.push("/?noredirect=1")}
                 className="text-gray-600 hover:text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
               >
                 <span className="text-sm lg:text-base">All Episodes</span>
