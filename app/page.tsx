@@ -184,12 +184,6 @@ export default function Home() {
           </h2>
           <div className="flex gap-2">
             <button
-              onClick={() => setShowAllEpisodes(!showAllEpisodes)}
-              className="px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
-            >
-              {showAllEpisodes ? "Hide All" : "Show All"}
-            </button>
-            <button
               onClick={() => setShowMenu(!showMenu)}
               className="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center"
             >
@@ -236,10 +230,16 @@ export default function Home() {
         {showMenu && (
           <div className="absolute top-16 right-4 bg-white border rounded-lg shadow-lg p-3 z-10">
             <button
+              onClick={() => setShowAllEpisodes(!showAllEpisodes)}
+              className="block w-full text-left px-3 py-2 text-sm text-gray-700 bg-gray-50 rounded"
+            >
+              {showAllEpisodes ? "Hide All Episodes" : "Show All Episodes"}
+            </button>
+            <button
               onClick={clearViewedEpisodes}
               className="block w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded"
             >
-              Clear
+              Clear Viewed
             </button>
           </div>
         )}
@@ -390,22 +390,22 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Episode Content - Right Side - Made wider and added prose styling */}
-        <div className="lg:col-span-3 pt-16 pl-16 pr-4 pb-4 lg:pr-8 lg:pb-8 font-['Cochin','Georgia',serif]">
+        {/* Episode Content - Right Side - Kindle-style reading experience */}
+        <div className="w-full lg:col-span-3 pt-8 pb-8 px-4 lg:pt-16 lg:pb-8 lg:pl-16 lg:pr-8 font-['Cochin','Georgia',serif]">
           {selectedEpisode && (
             <div className="max-w-none">
               <div className="mb-0">
                 <h1
-                  className="text-4xl font-bold text-gray-900 mb-0"
+                  className="text-3xl lg:text-4xl font-bold text-gray-900 mb-0"
                   style={{ marginBottom: "0", paddingBottom: "0" }}
                 >
                   {selectedEpisode.episode}: {selectedEpisode.title}
                 </h1>
               </div>
 
-              <div className="mb-6 mt-4 ml-8">
+              <div className="mb-6 mt-6 lg:mt-4 lg:ml-8">
                 <ul
-                  className="list-disc list-inside text-gray-700 text-lg leading-relaxed space-y-0.5 mt-0 pt-0 custom-synopsis-list"
+                  className="list-disc list-inside text-gray-700 text-xl lg:text-lg leading-relaxed space-y-2 lg:space-y-0.5 mt-0 pt-0 custom-synopsis-list"
                   style={{ marginTop: "0", paddingTop: "0" }}
                 >
                   {selectedEpisode.synopsis.map((point, index) => (
@@ -429,7 +429,7 @@ export default function Home() {
                     .map((character, index) => (
                       <span
                         key={index}
-                        className="bg-black text-white px-3 py-1 rounded-full text-sm font-['Inter',sans-serif]"
+                        className="bg-black text-white px-3 py-1 rounded-full text-base lg:text-sm font-['Inter',sans-serif]"
                       >
                         {character}
                       </span>
@@ -446,7 +446,7 @@ export default function Home() {
                         key={index}
                         className="bg-gray-50 rounded-lg border p-4 hover:shadow-md transition-shadow"
                       >
-                        <h6 className="font-semibold text-gray-800 mb-4 text-xl">
+                        <h6 className="font-semibold text-gray-800 mb-4 text-lg lg:text-xl">
                           {index + 1}. {beat.title}
                         </h6>
                         <div className="space-y-4">
