@@ -25,6 +25,7 @@ export default function EpisodePage() {
   const [episode, setEpisode] = useState<EpisodeAnalysis | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
     const loadEpisode = async () => {
@@ -71,6 +72,32 @@ export default function EpisodePage() {
     }
   }, [params.episode]);
 
+  // Mark current and previous episodes as read
+  useEffect(() => {
+    if (episode) {
+      try {
+        const saved = localStorage.getItem("viewedEpisodes");
+        const viewed = saved ? new Set<number>(JSON.parse(saved)) : new Set<number>();
+        for (let i = 1; i <= episode.episode; i++) {
+          viewed.add(i);
+        }
+        localStorage.setItem("viewedEpisodes", JSON.stringify(Array.from(viewed)));
+      } catch (e) {
+        console.error("Failed to update viewed episodes", e);
+      }
+    }
+  }, [episode]);
+
+  // Show banner when redirected to the most recently read episode
+  useEffect(() => {
+    const search = new URLSearchParams(window.location.search);
+    if (search.get("banner") === "1") {
+      setShowBanner(true);
+      const t = setTimeout(() => setShowBanner(false), 3000);
+      return () => clearTimeout(t);
+    }
+  }, []);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
@@ -91,6 +118,12 @@ export default function EpisodePage() {
 
   return (
     <div className="min-h-screen bg-white">
+      {showBanner && (
+        <div className="relative bg-yellow-100 text-yellow-800 py-2 text-center">
+          <span className="font-semibold">Most recently read</span>
+          <div className="absolute left-1/2 -bottom-2 transform -translate-x-1/2 w-0 h-0 border-x-8 border-b-8 border-x-transparent border-b-yellow-100" />
+        </div>
+      )}
       {/* Mobile Navigation */}
       <div className="lg:hidden bg-gray-100 border-b">
         <div className="flex items-center justify-between">
