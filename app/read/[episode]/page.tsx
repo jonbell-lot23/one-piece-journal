@@ -174,6 +174,52 @@ export default function EpisodePage() {
         </div>
       </div>
 
+      {/* Top Episode Navigation */}
+      <div className="flex justify-between items-center text-sm text-gray-500 px-4 py-2 border-b border-gray-200">
+        <button
+          onClick={() => router.push(`/read/${Number(params.episode) - 1}`)}
+          disabled={Number(params.episode) <= 1}
+          className={`flex items-center gap-1 hover:text-gray-700 transition-colors ${
+            Number(params.episode) <= 1 ? "text-gray-300 cursor-not-allowed" : ""
+          }`}
+        >
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          <span>Prev</span>
+        </button>
+
+        <button
+          onClick={() => router.push(`/read/${Number(params.episode) + 1}`)}
+          className="flex items-center gap-1 hover:text-gray-700 transition-colors text-gray-500"
+        >
+          <span>Next</span>
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+      </div>
+
       {/* Episode Content - Kindle-style reading experience */}
       <div className="w-full pt-8 pb-8 px-4 lg:pt-16 lg:pb-8 lg:pl-16 lg:pr-8 font-serif">
         <div className="max-w-none">
